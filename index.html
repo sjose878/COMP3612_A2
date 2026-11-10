@@ -25,7 +25,11 @@
 
       
     </header>
-    <div id="view-home"></div>
+    <div id="view-home">
+      <img id="home-hero-img" src="#" alt="hero img"></img>
+      <span>Epic Tagline Here</span>
+      <div id="product-scroll"></div>
+    </div>
     <div id="view-browser"></div>
     <div id="view-single-product">
         <nav>
@@ -43,6 +47,54 @@
         </aside>
     </div>
     <div id="view-cart"></div>
+    <div id="view-single-product"></div>
+    <div id="view-cart">
+      <p><strong>Shopping Cart</strong></p>
+      <table id="cart-products">
+        <th>
+          <td><strong>Items</strong></td>
+          <td><strong>Price</strong></td>
+          <td><strong>Quantity</strong></td>
+          <td><strong>Subtotal</strong></td>
+        </th>
+      </table>
+      
+      <form id="cart-checkout-form">
+        <label><strong>Shipping</strong></label>
+        <select id="cart-shipping-choice">
+          <option>Standard</option>
+          <option>Express</option>
+          <option>International</option>
+        </select>
+        <select id="cart-destination-choice">
+          <option>Canada</option>
+          <option>United States</option>
+          <option>International</option>
+        </select>
+        <button type="submit">Checkout</button>
+      </form>
+
+      <span><strong>Summary</strong></span>
+      <table id="cart-summary">
+         <tr>
+          <td>Merchandise</td>
+          <td id="cart-merch-price">$temp</td>
+         </tr>
+         <tr>
+          <td>Shipping</td>
+          <td id="cart-ship-price">$temp</td>
+         </tr>
+         <tr>
+          <td>Tax</td>
+          <td id="cart-tax-price">$temp</td>
+         </tr>
+         <tr>
+          <td><strong>Tax</strong></td>
+          <td id="cart-total-price"><strong>$temp</strong></td>
+         </tr>
+      </table>
+
+    </div>
     <dialog></dialog>
     <footer>
         <a href="https://github.com/sjose878/COMP3612_A2">GitHub</a>
