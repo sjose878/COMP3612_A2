@@ -28,9 +28,89 @@
     <div id="view-home">
       <img id="home-hero-img" src="#" alt="hero img"></img>
       <h1 id="home-tagline">Epic Tagline Here</h1>
-      <div id="product-scroll"></div>
+      <div id="home-product-scroll"></div>
     </div>
-    <div id="view-browser"></div>
+
+    <div id="view-browser">
+      <h1><strong>Browse</strong></h1>
+
+      <form id="browser-departments-form">
+        <label><strong>Departments</strong></label>
+        
+        <div id="browse-name">
+          <label><strong>Name</strong></label>
+          <button id="browse-show-name">triangle</button>
+
+          <div id="browse-name-options">
+            <div id="browse-name">
+              <input type="checkbox">
+              <input type="text" id="browse-name-input">
+            </div>
+          </div>
+        </div>
+
+        <div id="browse-category">
+          <label><strong>Category</strong></label>
+          <button id="browse-show-category">triangle</button>
+
+          <div id="browse-category-options">
+            <input type="checkbox" id="browse-beauty-option">Beauty</input>
+            <input type="checkbox" id="browse-fragrances-option">Fragrances</input>
+            <input type="checkbox" id="browse-furniture-option">Furniture</input>
+            <input type="checkbox" id="browse-groceries-option">Groceries</input>
+          </div>
+    
+        </div>
+
+        <div id="browse-rating">
+          <label><strong>Rating</strong></label>
+          <button id="browse-show-rating">triangle</button>
+
+          <div id="browse-rating-options">
+            <input type="checkbox" id="browse-onestar-option">★</input>
+            <input type="checkbox" id="browse-twostar-option">★★</input>
+            <input type="checkbox" id="browse-threestar-option">★★★</input>
+            <input type="checkbox" id="browse-fourstar-option">★★★★</input>
+            <input type="checkbox" id="browse-fivestar-option">★★★★★</input>
+          </div>
+          <div id="browse-card"></div>
+        </div>
+
+        <div id="browser-price">
+          <label><strong>price</strong></label>
+          <button id="browse-show-price">triangle</button>
+
+          <div id="browse-rating-options">
+            <div id="browse-under">
+              <input type="checkbox" id="browse-under-option">Under</input>
+              <input type="number" id="browse-under-input" min="0">
+            </div>
+
+            <div id="browse-over">
+              <input type="checkbox" id="browse-over-option">Over</input>
+              <input type="number" id="browse-over-input" min="0">
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <form id="browse-sort">
+        <label>Sort</label>
+        <select>
+          <option>Product Name</option>
+          <option>Price</option>
+          <option>Category</option>
+        </select>
+      </form>
+
+      <p id="browse-results"><strong>Results</strong></p> <!-- find better type -->
+      <button id="browse-clear-filters">X Clear All</button>
+      <div id="browse-filter-list">
+        <!--populate w/ js. make them clickable to delete single filter?
+        like <button>X {filter name}</button>
+        -->
+      </div>
+    </div>
 
     <div id="view-category">
       <img id="category-hero-img" src="#" alt="hero img category">
@@ -53,8 +133,9 @@
             <h1>INSERT PRODUCT TITLE</h1>
         </aside>
     </div>
+
     <div id="view-cart">
-      <p><strong>Shopping Cart</strong></p>
+      <h1><strong>Shopping Cart</strong></h1>
       <table id="cart-products">
         <th>
           <td><strong>Items</strong></td>
