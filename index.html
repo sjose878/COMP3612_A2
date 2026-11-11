@@ -40,12 +40,48 @@
             <span>></span>
             <span class="breadcrumb">product.title</span>
         </nav>
-        <figure>
-            <img src="#" alt="Product image">
-        </figure>
-        <aside>
-            <h1>INSERT PRODUCT TITLE</h1>
-        </aside>
+        <section id="single-product-hero">
+            <figure>
+                <img src="#" alt="Product image">
+            </figure>
+            <aside>
+                <h1>INSERT PRODUCT TITLE</h1>
+                <h2>Product $Price</h2>
+                <p>SKU</p>
+                <div id="single-product-stars">Insert # of &#9733;</div>
+                <div id="single-product-tags">insert product tags</div>
+                <p id="single-product-stock"> In/Out of stock</p>
+                <p id="single-product-desc">Insert product description</p>
+                <form>
+                    <label>Quantity</label>
+                    <input type="number" value="1" min="1"><br>
+                    <button type="submit">+ Add to Cart</button>
+                </form>
+            </aside>
+        </section>
+
+        <section id="single-product-details">
+            <form>
+                <button type="radio" name="detail_tabs">Specifications</button>
+                <button type="radio" name="detail_tabs">Reviews</button>
+            </form>
+            <div id="specifications">
+                <table>
+                    <tr>
+                        <th>Replace with JS that shows weight, dimensions, warranty, shipping info, & return policy of product</th>
+                    </tr>
+                    <tr>
+                        <td>Weight</td>
+                        <td>product.weight</td>
+                    </tr>    
+                </table>
+            </div>
+
+            <div id="single-product-reviews">
+                
+            </div>
+        </section>
+
     </div>
     <div id="view-cart">
       <p><strong>Shopping Cart</strong></p>
