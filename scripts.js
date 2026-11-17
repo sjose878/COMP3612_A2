@@ -4,6 +4,22 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(data => data.json())
 
     const pages = ["home", "browser", "cart", "category"];
+
+    function dialogPopUp() {
+        document.querySelector("#nav-about-us-button")
+        .addEventListener("click", () => {
+            document.querySelector("#view-about-us").className = "visible";
+            const dialog = document.querySelector("dialog");
+            dialog.showModal();
+        });
+
+        document.querySelector("#close-dialog")
+        .addEventListener("click", () => {
+            const dialog = document.querySelector("dialog");
+            dialog.close();
+            document.querySelector("#view-about-us").className = "hidden";
+        });
+    }
     
     // probably better way to do this but idk. maybe in array store likw [{logo, home}, {home, home}, etc]? so dont have to do whole diff thing for logo. yeah that seems better hmm
     // might be able to put about us in here too but like in a diff function and just call that when page == about us so the function ist too long
@@ -32,6 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.querySelector("#view-single-product").className = "hidden";
             });
         }
+
+        dialogPopUp();
     }
 
     headerButtonEvents();
@@ -42,19 +60,5 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("#view-single-product").className = "visible";
         pages.forEach(item => document.querySelector(`#view-${item}`).className = "hidden");
     });
-
-    document.querySelector("#nav-about-us-button")
-    .addEventListener("click", () => {
-        document.querySelector("#view-about-us").className = "visible";
-        const dialog = document.querySelector("dialog");
-        dialog.showModal();
-    });
-
-    document.querySelector("#close-dialog")
-    .addEventListener("click", () => {
-        const dialog = document.querySelector("dialog");
-        dialog.close();
-        document.querySelector("#view-about-us").className = "hidden";
-    })
     
 });
