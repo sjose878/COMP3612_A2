@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
         .addEventListener("click", () => {
             document.querySelector("#view-home").className = "visible";
             pages.slice(1).forEach(item => document.querySelector(`#view-${item}`).className = "hidden");
+        
+            // TEMP, REMOVE LATER
+            document.querySelector("#view-single-product").className = "hidden";
         });
         
         // all other buttons in header
@@ -19,9 +22,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 document.querySelector(`#view-${clicked_page}`).className = "visible"; 
                 other_pages.forEach(item => document.querySelector(`#view-${item}`).className = "hidden");  
+                
+                //TEMP, REMOVE LATER
+                document.querySelector("#view-single-product").className = "hidden";
             });
         }
     }
 
     headerButtonEvents();
+
+    //TEMP, REMOVE LATER
+    document.querySelector("#funny-product-button")
+    .addEventListener("click", () => {
+        document.querySelector("#view-single-product").className = "visible";
+        pages.forEach(item => document.querySelector(`#view-${item}`).className = "hidden");
+    });
 });
