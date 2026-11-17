@@ -4,28 +4,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Assignment 2</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js"></script>
   </head>
+
   <body>
     <header>
-      <button><Strong>Logo</Strong></button>
-      <nav style="display: inline">
-        <button>Home</button>
+      <button id="nav-logo-button">Logo</button>
+      <nav>
+        <button id="nav-home-button" class="nav-button">Home</button>
         <span>|</span>
-        <button>Browse</button>
+        <button id="nav-browser-button" class="nav-button">Browse</button>
         <span>|</span>
-        <button>Category</button>
+        <button id="nav-category-button" class="nav-button">Category</button>
         <span>|</span>
-        <button>About</button>
+        <button id="nav-about-us-button" class="nav-button">About</button>
       </nav>
       <span>
-        <button>Cart</button>
+        <button id="nav-cart-button">Cart</button>
         <span id="num-cart-items">0</span>
       </span>
     </header>
 
     <hr>
     
-    <div id="view-home">
+    <div id="view-home" class="visible">
       <img id="home-hero-img" src="#" alt="hero img"></img>
       <h1 id="home-tagline">Epic Tagline Here</h1>
       <div id="home-product-scroll"></div>
@@ -33,7 +36,7 @@
 
     <hr>
 
-    <div id="view-browser">
+    <div id="view-browser" class="hidden">
       <h1><strong>Browse</strong></h1>
 
       <form id="browser-departments-form">
@@ -116,7 +119,7 @@
 
     <hr>
 
-    <div id="view-category">
+    <div id="view-category" class="hidden">
       <img id="category-hero-img" src="#" alt="hero img category">
       <h1 id="catogry-title">CATEGORY TITLE 20 27 28</h1>
       <div class="category-card"></div>
@@ -124,7 +127,7 @@
 
     <hr>
 
-    <div id="view-single-product">
+    <div id="view-single-product" class="hidden">
         <nav>
             <a href="#">Home</a>
             <span>></span>
@@ -182,7 +185,7 @@
 
     <hr>
 
-    <div id="view-cart">
+    <div id="view-cart" class="hidden">
       <h1><strong>Shopping Cart</strong></h1>
       <table id="cart-products">
         <th>
@@ -231,7 +234,7 @@
 
     <hr>
 
-    <div id="view-about-us">
+    <div id="view-about-us" class="hidden">
       <dialog></dialog>
     </div>
     <hr>
