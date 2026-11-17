@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const pages = ["home", "browser", "cart", "category"];
     
-    // probably better way to do this but idk
+    // probably better way to do this but idk. maybe in array store likw [{logo, home}, {home, home}, etc]? so dont have to do whole diff thing for logo. yeah that seems better hmm
+    // might be able to put about us in here too but like in a diff function and just call that when page == about us so the function ist too long
     function headerButtonEvents(){
         // logo needs to go to home view
         document.querySelector("#nav-logo-button")
