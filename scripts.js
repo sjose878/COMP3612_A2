@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+    //all data fetch
+    fetch("https://dummyjson.com/products?limit=100")
+    .then(data => data.json())
+
     const pages = ["home", "browser", "cart", "category"];
     
     // probably better way to do this but idk
