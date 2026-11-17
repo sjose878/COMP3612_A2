@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const pages = ["home", "browser", "cart", "category"];
 
-    function dialogPopUp() {
+    function addDialogPopUp() {
         document.querySelector("#nav-about-us-button")
         .addEventListener("click", () => {
             document.querySelector("#view-about-us").className = "visible";
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // probably better way to do this but idk. maybe in array store likw [{logo, home}, {home, home}, etc]? so dont have to do whole diff thing for logo. yeah that seems better hmm
     // might be able to put about us in here too but like in a diff function and just call that when page == about us so the function ist too long
-    function headerButtonEvents(){
+    function addHeaderButtonEvents(){
         // logo needs to go to home view
         document.querySelector("#nav-logo-button")
         .addEventListener("click", () => {
@@ -49,10 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        dialogPopUp();
+        addDialogPopUp();
     }
 
-    headerButtonEvents();
+    addHeaderButtonEvents();
 
     //TEMP, REMOVE LATER
     document.querySelector("#funny-product-button")
