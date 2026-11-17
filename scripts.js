@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const pages = ["home", "browser", "cart", "category", "about-us"];
+    const pages = ["home", "browser", "cart", "category"];
     
     // probably better way to do this but idk
     function headerButtonEvents(){
@@ -37,4 +37,19 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("#view-single-product").className = "visible";
         pages.forEach(item => document.querySelector(`#view-${item}`).className = "hidden");
     });
+
+    document.querySelector("#nav-about-us-button")
+    .addEventListener("click", () => {
+        document.querySelector("#view-about-us").className = "visible";
+        const dialog = document.querySelector("dialog");
+        dialog.showModal();
+    });
+
+    document.querySelector("#close-dialog")
+    .addEventListener("click", () => {
+        const dialog = document.querySelector("dialog");
+        dialog.close();
+        document.querySelector("#view-about-us").className = "hidden";
+    })
+    
 });
