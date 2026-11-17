@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const pages = ["home", "browser", "cart", "category", "about-us"]
+    const pages = ["home", "browser", "cart", "category", "about-us"];
     
+    // probably better way to do this but idk
     function headerButtonEvents(){
         // logo needs to go to home view
         document.querySelector("#nav-logo-button")
