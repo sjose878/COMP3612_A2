@@ -131,54 +131,77 @@
     <hr>
 
     <div id="view-single-product" class="hidden">
-        <nav>
-            <a href="#">Home</a>
+        <nav class="m-5">
+            <a href="#" class="underline font-bold">Home</a>
             <span>></span>
-            <a href="#" class="breadcrumb">JS Category Name</a>
+            <a href="#" class="breadcrumb underline font-bold">JS Category Name</a>
             <span>></span>
-            <span class="breadcrumb">product.title</span>
+            <span class="breadcrumb font-bold">product.title</span>
         </nav>
-        <section id="single-product-hero">
-            <figure>
-                <img src="#" alt="Product image">
+        <section id="single-product-hero" class="grid grid-cols-2 gap-4 m-5">
+            <figure class="grid place-content-center">
+                <img src="test_image.jpg" alt="Product image" class="max-w-100">
             </figure>
             <aside>
-                <h1>INSERT PRODUCT TITLE</h1>
-                <h2>Product $Price</h2>
-                <p>SKU</p>
-                <div class="single-product-stars">Insert # of &#9733;</div>
-                <div id="single-product-tags">insert product tags</div>
-                <p id="single-product-stock"> In/Out of stock</p>
-                <p id="single-product-desc">Insert product description</p>
-                <form>
+                <h1 id="single-product-title" class="text-4xl font-bold pt-3 pb-5">INSERT PRODUCT TITLE</h1>
+                <h2 id="single-product-price" class="text-2xl font-bold">Product $Price</h2>
+                <p id="single-product-sku">SKU</p>
+                <div class="single-product-stars text-yellow-500">Insert # of &#9733;</div>
+                <div id="single-product-tags" class="pt-3">
+                  <span class="border pl-2 pr-2">Example tag1</span>
+                  <span class="border pl-2 pr-2">Example tag2</span>
+                </div>
+                <p id="single-product-stock" class="pt-3"> In/Out of stock</p>
+                <p id="single-product-desc" class="pt-3">Insert product description</p>
+                <form class="border p-3 max-w-75">
                     <label>Quantity</label>
-                    <input type="number" value="1" min="1"><br>
-                    <button type="submit">+ Add to Cart</button>
+                    <input type="number" value="1" min="1" class="border max-w-30"><br>
+                    <button type="submit" class="cursor-pointer text-2xl font-bold text-white bg-blue-500 rounded-xl p-3 m-3">+ Add to Cart</button>
                 </form>
             </aside>
         </section>
 
         <section id="single-product-details">
-            <form>
-                <button type="radio" name="detail_tabs">Specifications</button>
-                <button type="radio" name="detail_tabs">Reviews</button>
+            <form class="flex justify-start">
+                <button type="radio" name="detail_tabs" class="border pr-5 pl-5 m-0">Specifications</button>
+                <button type="radio" name="detail_tabs" class="border pr-5 pl-5 m-0">Reviews</button>
             </form>
-            <div id="specifications">
-                <table>
-                    <tr>
-                        <th>Replace with JS that shows weight, dimensions, warranty, shipping info, & return policy of product</th>
-                    </tr>
-                    <tr>
-                        <td>Weight</td>
-                        <td>product.weight</td>
-                    </tr>    
+            <div id="specifications" class="border">
+                <table class="table-auto">
+                    <thead>
+                      <tr>
+                          <th colspan="2" class="text-left p-2">Specifications</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="odd:bg-white even:bg-gray-200">
+                          <td class="pl-2 pr-10">Example-weight</td>
+                          <td class="pl-2">product.weight</td>
+                      </tr>
+                      <tr class="odd:bg-white even:bg-gray-200">
+                          <td class="pl-2 pr-10">Example-dimensions</td>
+                          <td class="pl-2">product.dimensions</td>
+                      </tr>
+                    </tbody>    
                 </table>
             </div>
 
-            <div id="single-product-reviews">
+            <div id="single-product-reviews" class="border">
                 <ul id="products-reviews">
                     <li>
-                        <p>Use JS to insert star rating, comment, date, reviewer name</p>
+                        <div>
+                          <span class="text-yellow-500 pl-3"># of &#9733;</span>
+                          <span class="text-gray-500">2026-11-17</span>
+                          <p class="font-bold pl-3">Horror Skunx</p>
+                          <p class="pl-3">Very bad product it stole my brain</p>
+                          <hr>
+                        </div>
+                        <div>
+                          <span class="text-yellow-500 pl-3"># of &#9733;</span>
+                          <span class="text-gray-500">2026-11-17</span>
+                          <p class="font-bold pl-3">The Aura Farmer</p>
+                          <p class="pl-3">Love my husband</p>
+                        </div>
                     </li>
                 </ul>
             </div>
