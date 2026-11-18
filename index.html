@@ -162,26 +162,39 @@
         </section>
 
         <section id="single-product-details">
-            <form>
-                <button type="radio" name="detail_tabs">Specifications</button>
-                <button type="radio" name="detail_tabs">Reviews</button>
+            <form class="flex justify-start">
+                <button type="radio" name="detail_tabs" class="border pr-5 pl-5 m-0">Specifications</button>
+                <button type="radio" name="detail_tabs" class="border pr-5 pl-5 m-0">Reviews</button>
             </form>
-            <div id="specifications">
-                <table>
-                    <tr>
-                        <th>Replace with JS that shows weight, dimensions, warranty, shipping info, & return policy of product</th>
-                    </tr>
-                    <tr>
-                        <td>Weight</td>
-                        <td>product.weight</td>
-                    </tr>    
+            <div id="specifications" class="border">
+                <table class="table-auto">
+                    <thead>
+                      <tr>
+                          <th colspan="2" class="text-left p-2">Specifications</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="odd:bg-white even:bg-gray-200">
+                          <td class="pl-2 pr-10">Example-weight</td>
+                          <td class="pl-2">product.weight</td>
+                      </tr>
+                      <tr class="odd:bg-white even:bg-gray-200">
+                          <td class="pl-2 pr-10">Example-dimensions</td>
+                          <td class="pl-2">product.dimensions</td>
+                      </tr>
+                    </tbody>    
                 </table>
             </div>
 
-            <div id="single-product-reviews">
+            <div id="single-product-reviews" class="border">
                 <ul id="products-reviews">
                     <li>
-                        <p>Use JS to insert star rating, comment, date, reviewer name</p>
+                        <div>
+                          <span class="text-yellow-500 pl-3"># of &#9733;</span>
+                          <span class="text-gray-500">2026-11-17</span>
+                          <p class="font-bold pl-3">Horror Skunx</p>
+                          <p class="pl-3">Very bad product it stole my brain</p>
+                        </div>
                     </li>
                 </ul>
             </div>
