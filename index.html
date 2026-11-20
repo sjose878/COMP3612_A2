@@ -9,23 +9,20 @@
   </head>
 
   <body>
-    <header class="grid grid-cols-3 place-content-around bg-blue-500 text-white p-4">
+    <header class="grid grid-cols-[1fr_3fr_1fr] place-content-around bg-blue-500 text-white p-4">
       
-      <button id="nav-logo-button" class="text-yellow-950">Logo</button>
+      <button id="nav-logo-button" class="border-2 border-black text-yellow-300 text-6xl font-bold">&#9788;</button>
       
-      <nav class="">
-        <button id="nav-home-button" class="nav-button">Home</button>
-        <span>|</span>
+      <nav class="border-2 border-black flex justify-center gap-4">
+        <button id="nav-home-button" class="nav-button border-2 border-red-500">Home</button>
         <button id="nav-browser-button" class="nav-button">Browse</button>
-        <span>|</span>
         <button id="nav-category-button" class="nav-button">Category</button>
-        <span>|</span>
         <button id="nav-about-us-button" class="nav-button">About</button>
       </nav>
       
-      <div>
-        <button id="nav-cart-button">Cart</button>
-        <span id="num-cart-items">0</span>
+      <div class="border-2 border-black flex justify-center">
+        <button id="nav-cart-button" class="font-bold">Cart</button>
+        <span id="num-cart-items" class=" p-2 font-bold text-black bg-yellow-300 rounded-4xl">0</span>
       </div>
     </header>
 
