@@ -8,8 +8,8 @@
     <script src="scripts.js"></script>
   </head>
 
-  <body class="min-h-screen flex flex-col">
-    # Header
+  <body id="page-top">
+    <!--Header-->
     <header class="grid grid-cols-[1fr_3fr_1fr] place-content-around bg-blue-600 text-white p-3 sticky top-0">
       <div>
         <button id="nav-logo-button" class="text-yellow-300 text-6xl font-bold text-left cursor-pointer">&#9788;</button>
@@ -28,14 +28,14 @@
       </div>
     </header>
     
-    # Home view
+    <!--Home View-->
     <div id="view-home" class="visible">
       <img id="home-hero-img" src="#" alt="hero img"></img>
       <h1 id="home-tagline">Epic Tagline Here</h1>
       <div id="home-product-scroll"></div>
     </div>
 
-    # Browse View
+    <!--Browse View-->
     <div id="view-browser" class="hidden">
       <h1><strong>Browse</strong></h1>
 
@@ -120,14 +120,14 @@
       <button id="funny-product-button">single product temp button heh</button>
     </div>
 
-    # Category View
+    <!--Category View-->
     <div id="view-category" class="hidden">
       <img id="category-hero-img" src="#" alt="hero img category">
       <h1 id="catogry-title">CATEGORY TITLE 20 27 28</h1>
       <div class="category-card"></div>
     </div>
 
-    # Single Product View
+    <!--Single Product View-->
     <div id="view-single-product" class="hidden">
         <nav class="m-5">
             <a href="#" class="underline font-bold">Home</a>
@@ -164,7 +164,7 @@
                 <button type="radio" name="detail_tabs" class="border pr-5 pl-5 m-0">Specifications</button>
                 <button type="radio" name="detail_tabs" class="border pr-5 pl-5 m-0">Reviews</button>
             </form>
-            # Specifications
+            <!--Specifications-->
             <div id="specifications" class="border">
                 <table class="table-auto">
                     <thead>
@@ -184,7 +184,7 @@
                     </tbody>    
                 </table>
             </div>
-            # Reviews
+            <!--Reviews-->
             <div id="single-product-reviews" class="border">
                 <ul id="products-reviews">
                     <li>
@@ -207,7 +207,7 @@
         </section>
     </div>
 
-    # Cart View
+    <!--Cart View-->
     <div id="view-cart" class="hidden">
       <h1><strong>Shopping Cart</strong></h1>
       <table id="cart-products">
@@ -255,7 +255,7 @@
       </table>
     </div>
 
-    # About Us View
+    <!--About Us View-->
     <div id="view-about-us" class="hidden">
       <dialog class=" p-11 m-auto rounded-2xl ml-25 mr-25">
         <h1 class="font-bold italic text-6xl text-blue-500 pb-5">About Us</h1>
@@ -270,10 +270,26 @@
       </dialog>
     </div>
     
-    # Footer
-    <footer class="bg-blue-950 min-h-20">
-        <a href="https://github.com/sjose878/COMP3612_A2">GitHub</a>
-        <cite>&copy2026 COMP3612. All rights reserved.</cite>
+    <!--Footer-->
+    <footer class="bg-blue-900 text-white">
+        <div class="grid grid-cols-2 justify-center mb-2 p-3">
+          <section class="flex flex-col max-w-10">
+            <h1 class="font-bold">Socials</h1>
+            <a href="https://github.com/sjose878/COMP3612_A2" class="hover:underline animate-bounce">GitHub</a>
+            <a href="https://www.youtube.com/walmart" class="hover:underline">YouTube</a>
+            <a href="https://www.facebook.com/walmart/" class="hover:underline">Facebook</a>
+            <a href="https://en.wikipedia.org/wiki/Trollface" class="hover:underline cursor-help">Tinder</a>
+          </section>
+          <section class="flex flex-col items-start">
+            <h1 class="font-bold">Customer Support</h1>
+            <a href="https://en.wikipedia.org/wiki/Help!" class="hover:underline">Help</a>
+            <a href="https://en.wikipedia.org/wiki/Boomerang" class="hover:underline">Returns</a>
+            <a href="https://en.wikipedia.org/wiki/Titanic" class="hover:underline">Shipping Info</a>
+          </section>
+          <a href="#page-top" class="col-span-2 justify-self-end underline">Back to top</a>
+        </div>
+        <hr>
+        <cite class="m-3">&copy2026 COMP3612. All rights reserved.</cite>
     </footer>
   </body>
 </html>

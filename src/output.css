@@ -19,6 +19,8 @@
     --color-blue-50: oklch(97% 0.014 254.604);
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-blue-600: oklch(54.6% 0.245 262.881);
+    --color-blue-800: oklch(42.4% 0.199 265.638);
+    --color-blue-900: oklch(37.9% 0.146 265.522);
     --color-blue-950: oklch(28.2% 0.091 267.935);
     --color-gray-50: oklch(98.5% 0.002 247.839);
     --color-gray-100: oklch(96.7% 0.003 264.542);
@@ -54,6 +56,7 @@
     --radius-xl: 0.75rem;
     --radius-2xl: 1rem;
     --radius-4xl: 2rem;
+    --animate-bounce: bounce 1s infinite;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
   }
@@ -213,6 +216,9 @@
   .absolute {
     position: absolute;
   }
+  .fixed {
+    position: fixed;
+  }
   .relative {
     position: relative;
   }
@@ -222,11 +228,17 @@
   .top-0 {
     top: 0px;
   }
+  .right-0 {
+    right: 0px;
+  }
   .bottom-0 {
     bottom: 0px;
   }
   .left-0 {
     left: 0px;
+  }
+  .col-span-2 {
+    grid-column: span 2 / span 2;
   }
   .container {
     width: 100%;
@@ -270,11 +282,17 @@
   .mt-5 {
     margin-top: calc(var(--spacing) * 5);
   }
+  .mr-0 {
+    margin-right: 0px;
+  }
   .mr-5 {
     margin-right: calc(var(--spacing) * 5);
   }
   .mr-25 {
     margin-right: calc(var(--spacing) * 25);
+  }
+  .mb-2 {
+    margin-bottom: calc(var(--spacing) * 2);
   }
   .mb-5 {
     margin-bottom: calc(var(--spacing) * 5);
@@ -290,6 +308,9 @@
   }
   .ml-25 {
     margin-left: calc(var(--spacing) * 25);
+  }
+  .ml-auto {
+    margin-left: auto;
   }
   .flex {
     display: flex;
@@ -339,6 +360,18 @@
   .w-30 {
     width: calc(var(--spacing) * 30);
   }
+  .max-w-10 {
+    max-width: calc(var(--spacing) * 10);
+  }
+  .max-w-15 {
+    max-width: calc(var(--spacing) * 15);
+  }
+  .max-w-20 {
+    max-width: calc(var(--spacing) * 20);
+  }
+  .max-w-25 {
+    max-width: calc(var(--spacing) * 25);
+  }
   .max-w-30 {
     max-width: calc(var(--spacing) * 30);
   }
@@ -348,8 +381,14 @@
   .max-w-100 {
     max-width: calc(var(--spacing) * 100);
   }
+  .min-w-4 {
+    min-width: calc(var(--spacing) * 4);
+  }
   .min-w-6 {
     min-width: calc(var(--spacing) * 6);
+  }
+  .min-w-25 {
+    min-width: calc(var(--spacing) * 25);
   }
   .flex-grow {
     flex-grow: 1;
@@ -360,8 +399,23 @@
   .border-collapse {
     border-collapse: collapse;
   }
+  .transform {
+    transform: var(--tw-rotate-x, ) var(--tw-rotate-y, ) var(--tw-rotate-z, ) var(--tw-skew-x, ) var(--tw-skew-y, );
+  }
+  .animate-bounce {
+    animation: var(--animate-bounce);
+  }
+  .cursor-cell {
+    cursor: cell;
+  }
+  .cursor-help {
+    cursor: help;
+  }
   .cursor-pointer {
     cursor: pointer;
+  }
+  .cursor-zoom-out {
+    cursor: zoom-out;
   }
   .resize {
     resize: both;
@@ -393,6 +447,9 @@
   .place-content-around {
     place-content: space-around;
   }
+  .place-content-between {
+    place-content: space-between;
+  }
   .place-content-center {
     place-content: center;
   }
@@ -401,6 +458,9 @@
   }
   .items-center {
     align-items: center;
+  }
+  .items-start {
+    align-items: flex-start;
   }
   .justify-around {
     justify-content: space-around;
@@ -425,6 +485,12 @@
   }
   .gap-5 {
     gap: calc(var(--spacing) * 5);
+  }
+  .justify-self-center {
+    justify-self: center;
+  }
+  .justify-self-end {
+    justify-self: flex-end;
   }
   .overflow-y-scroll {
     overflow-y: scroll;
@@ -471,8 +537,17 @@
   .bg-blue-600 {
     background-color: var(--color-blue-600);
   }
+  .bg-blue-800 {
+    background-color: var(--color-blue-800);
+  }
+  .bg-blue-900 {
+    background-color: var(--color-blue-900);
+  }
   .bg-blue-950 {
     background-color: var(--color-blue-950);
+  }
+  .bg-gray-200 {
+    background-color: var(--color-gray-200);
   }
   .bg-red-600 {
     background-color: var(--color-red-600);
@@ -647,6 +722,26 @@
     }
   }
 }
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false;
+}
 @property --tw-border-style {
   syntax: "*";
   inherits: false;
@@ -661,9 +756,24 @@
   inherits: false;
   initial-value: solid;
 }
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: block))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
+      --tw-rotate-x: initial;
+      --tw-rotate-y: initial;
+      --tw-rotate-z: initial;
+      --tw-skew-x: initial;
+      --tw-skew-y: initial;
       --tw-border-style: solid;
       --tw-font-weight: initial;
       --tw-outline-style: solid;
