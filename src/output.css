@@ -913,8 +913,18 @@
     background-color: var(--color-gray-200);
   }
   @media (hover: hover) {
+    .hover\:bg-blue-600:hover {
+      background-color: var(--color-blue-600);
+    }
     .hover\:bg-blue-950:hover {
       background-color: var(--color-blue-950);
+    }
+    .hover\:font-bold:hover {
+      --tw-font-weight: var(--font-weight-bold);
+      font-weight: var(--font-weight-bold);
+    }
+    .hover\:text-black:hover {
+      color: var(--color-black);
     }
     .hover\:text-yellow-300:hover {
       color: var(--color-yellow-300);
