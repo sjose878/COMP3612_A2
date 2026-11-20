@@ -37,87 +37,83 @@
 
     <!--Browse View-->
     <div id="view-browser" class="hidden">
-      <h1><strong>Browse</strong></h1>
-
-      <form id="browser-departments-form">
-        <label><strong>Departments</strong></label>
-        
-        <div id="browse-name">
-          <label><strong>Name</strong></label>
-          <button id="browse-show-name">triangle</button>
-
-          <div id="browse-name-options">
-            <div id="browse-name">
-              <input type="checkbox">
-              <input type="text" id="browse-name-input">
+      <h1 class="flex justify-center"><strong>Browse</strong></h1>
+      <div class="grid grid-cols-[1fr_3fr] gap-4">
+        <aside class="bg-gray-200">
+          <h1 class="m-3 text-2xl"><strong>Departments</strong></h1>
+          <form id="browser-departments-form" class="ml-7 mr-7 min-h-screen">
+            
+            <details id="browse-name">
+              <summary class="font-bold">Name</summary>
+              <div id="browse-name-options" class="grid grid-cols-[1fr_5fr] gap-2 pb-3">
+                <input type="checkbox" class="peer/name">
+                <input type="text" id="browse-name-input" placeholder="Find a product" class="bg-white max-w-50 border-2 border-gray-200 peer-checked/name:border-black cursor-not-allowed peer-checked/name:cursor-text">
+              </div>
+            </details>
+            <hr class="text-blue-900">
+            <details id="browse-category">
+              <summary class="font-bold">Category</summary>
+              <div id="browse-category-options" class="grid grid-cols-[1fr_5fr] gap-2 pb-3">
+                <!--NOTE: input does not have a closing tag-->
+                <input type="checkbox" id="browse-beauty-option" class="peer/beauty"><span class="peer-checked/beauty:font-bold">Beauty</span>
+                <input type="checkbox" id="browse-fragrances-option" class="peer/fragrances"><span class="peer-checked/fragrances:font-bold">Fragrance</span>
+                <input type="checkbox" id="browse-furniture-option" class="peer/furniture"><span class="peer-checked/furniture:font-bold">Furniture</span>
+                <input type="checkbox" id="browse-groceries-option" class="peer/groceries"><span class="peer-checked/groceries:font-bold">Groceries</span>
+              </div>
+            </details>
+            <hr class="text-blue-900">
+            <details id="browse-rating">
+              <summary class="font-bold">Rating</summary>
+              <div id="browse-rating-options" class="grid grid-cols-[1fr_5Fr] gap-1 pb-3 text-yellow-500">
+                <input type="checkbox" id="browse-onestar-option" class="peer/onestar"><span class="peer-checked/onestar:animate-bounce">★</span>
+                <input type="checkbox" id="browse-twostar-option" class="peer/twostar"><span class="peer-checked/twostar:animate-bounce">★★</span>
+                <input type="checkbox" id="browse-threestar-option" class="peer/threestar"><span class="peer-checked/threestar:animate-bounce">★★★</span>
+                <input type="checkbox" id="browse-fourstar-option" class="peer/fourstar"><span class="peer-checked/fourstar:animate-bounce">★★★★</span>
+                <input type="checkbox" id="browse-fivestar-option" class="peer/fivestar"><span class="peer-checked/fivestar:animate-bounce">★★★★★</span>
             </div>
+            <div id="browse-card"></div>
+            </details>
+            <hr class="text-blue-900">
+            <details id="browser-price" class="pb-3">
+              <summary class="font-bold">Price</summary>
+              <div id="browse-rating-options" class="flex flex-row-reverse gap-2">
+                <div id="browse-under">
+                  <input type="checkbox" id="browse-under-option" class="peer/under"><span> Under</span>
+                  <input type="number" id="browse-under-input" min="0" placeholder="$" class="bg-white max-w-30 border-2 border-gray-200 peer-checked/under:border-black cursor-not-allowed peer-checked/under:cursor-text">
+                </div>
+
+                <div id="browse-over">
+                  <input type="checkbox" id="browse-over-option" class="peer/over"><span> Over</span>
+                  <input type="number" id="browse-over-input" min="0" placeholder="$" class="bg-white max-w-30 border-2 border-gray-200 peer-checked/over:border-black cursor-not-allowed peer-checked/over:cursor-text">
+                </div>
+              </div>
+            </details>
+            
+          </form>
+        </aside>
+
+        <main class="bg-gray-200">
+          <form id="browse-sort">
+            <label>Sort</label>
+            <select>
+              <option>Product Name</option>
+              <option>Price</option>
+              <option>Category</option>
+            </select>
+          </form>
+
+          <p id="browse-results"><strong>Results</strong></p> <!-- find better type -->
+          <button id="browse-clear-filters">X Clear All</button>
+          <div id="browse-filter-list">
+            <!--populate w/ js. make them clickable to delete single filter?
+            like <button>X {filter name}</button>
+            -->
           </div>
-        </div>
 
-        <div id="browse-category">
-          <label><strong>Category</strong></label>
-          <button id="browse-show-category">triangle</button>
-
-          <div id="browse-category-options">
-            <input type="checkbox" id="browse-beauty-option">Beauty</input>
-            <input type="checkbox" id="browse-fragrances-option">Fragrances</input>
-            <input type="checkbox" id="browse-furniture-option">Furniture</input>
-            <input type="checkbox" id="browse-groceries-option">Groceries</input>
-          </div>
-    
-        </div>
-
-        <div id="browse-rating">
-          <label><strong>Rating</strong></label>
-          <button id="browse-show-rating">triangle</button>
-
-          <div id="browse-rating-options">
-            <input type="checkbox" id="browse-onestar-option">★</input>
-            <input type="checkbox" id="browse-twostar-option">★★</input>
-            <input type="checkbox" id="browse-threestar-option">★★★</input>
-            <input type="checkbox" id="browse-fourstar-option">★★★★</input>
-            <input type="checkbox" id="browse-fivestar-option">★★★★★</input>
-          </div>
-          <div id="browse-card"></div>
-        </div>
-
-        <div id="browser-price">
-          <label><strong>price</strong></label>
-          <button id="browse-show-price">triangle</button>
-
-          <div id="browse-rating-options">
-            <div id="browse-under">
-              <input type="checkbox" id="browse-under-option">Under</input>
-              <input type="number" id="browse-under-input" min="0">
-            </div>
-
-            <div id="browse-over">
-              <input type="checkbox" id="browse-over-option">Over</input>
-              <input type="number" id="browse-over-input" min="0">
-            </div>
-          </div>
-        </div>
-      </form>
-
-      <form id="browse-sort">
-        <label>Sort</label>
-        <select>
-          <option>Product Name</option>
-          <option>Price</option>
-          <option>Category</option>
-        </select>
-      </form>
-
-      <p id="browse-results"><strong>Results</strong></p> <!-- find better type -->
-      <button id="browse-clear-filters">X Clear All</button>
-      <div id="browse-filter-list">
-        <!--populate w/ js. make them clickable to delete single filter?
-        like <button>X {filter name}</button>
-        -->
+          <!-- TEMP BUTTON!!!!!!! -->
+          <button id="funny-product-button">single product temp button heh</button>
+        </main>
       </div>
-
-      <!-- TEMP BUTTON!!!!!!! -->
-      <button id="funny-product-button">single product temp button heh</button>
     </div>
 
     <!--Category View-->
