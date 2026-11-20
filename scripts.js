@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function addDialogPopUp() {
         document.querySelector("#nav-about-us-button")
         .addEventListener("click", () => {
-            document.querySelector("#view-about-us").className = "visible";
+            document.querySelector("#view-about-us").classList.remove("hidden");
             const dialog = document.querySelector("dialog");
             dialog.showModal();
         });
@@ -17,24 +17,22 @@ document.addEventListener("DOMContentLoaded", () => {
         .addEventListener("click", () => {
             const dialog = document.querySelector("dialog");
             dialog.close();
-            document.querySelector("#view-about-us").className = "hidden";
+            document.querySelector("#view-about-us").classList.add("hidden");
         });
     }
     
-    // probably better way to do this but idk. maybe in array store likw [{logo, home}, {home, home}, etc]? so dont have to do whole diff thing for logo. yeah that seems better hmm
-    // might be able to put about us in here too but like in a diff function and just call that when page == about us so the function ist too long
     function addHeaderButtonEvents(){
         // all other buttons in header
         for (let page of pages) {
             document.querySelector(`#nav-${page.button}-button`)
             .addEventListener("click", (e) => {  
-                pages.forEach(item => document.querySelector(`#view-${item.view}`).className = "hidden");                       
+                pages.forEach(item => document.querySelector(`#view-${item.view}`).classList.add("hidden"));                   
                 
                 //TEMP, REMOVE LATER 
-                document.querySelector("#view-single-product").className = "hidden";
+                document.querySelector("#view-single-product").classList.add("hidden");
 
-                const clicked_page = pages.find(item => `#nav-${item.button}-button` === `#${e.target.id}`);
-                document.querySelector(`#view-${clicked_page.view}`).className = "visible"; 
+                const clicked_page = pages.find(item => `#nav-${item.button}-button` === `#${e.currentTarget.id}`);
+                document.querySelector(`#view-${clicked_page.view}`).classList.remove("hidden");
             });
         }
 
@@ -46,8 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
     //TEMP, REMOVE LATER
     document.querySelector("#funny-product-button")
     .addEventListener("click", () => {
-        pages.forEach(item => document.querySelector(`#view-${item.view}`).className = "hidden");
-        document.querySelector("#view-single-product").className = "visible"; 
+        pages.forEach(item => document.querySelector(`#view-${item.view}`).classList.add("hidden"));
+        document.querySelector("#view-single-product").classList.remove("hidden");
     });
     
 });
