@@ -10,7 +10,7 @@
 
   <body id="page-top">
     <!--Header-->
-    <header class="grid grid-cols-[1fr_3fr_1fr] place-content-around bg-blue-600 text-white p-3 sticky top-0">
+    <header class="grid grid-cols-[1fr_3fr_1fr] place-content-around bg-blue-600 text-white p-3 sticky top-0 z-999">
       <div>
         <button id="nav-logo-button" class="text-yellow-300 text-6xl font-bold text-left cursor-pointer">&#9788;</button>
       </div>
@@ -37,7 +37,7 @@
 
     <!--Browse View-->
     <div id="view-browser" class="hidden">
-      <h1 class="flex justify-center"><strong>Browse</strong></h1>
+      <h1 class="flex justify-center text-2xl"><strong>Browse for Products</strong></h1>
       <div class="grid grid-cols-[1fr_3fr] gap-4">
         <aside class="bg-gray-200">
           <h1 class="m-3 text-2xl"><strong>Departments</strong></h1>
@@ -92,23 +92,33 @@
         </aside>
 
         <main class="bg-gray-200">
-          <form id="browse-sort">
-            <label>Sort</label>
-            <select>
+          <form id="browse-sort" class="m-3">
+            <label>Sort by:</label>
+            <select class="bg-white">
               <option>Product Name</option>
               <option>Price</option>
               <option>Category</option>
             </select>
           </form>
 
-          <p id="browse-results"><strong>Results</strong></p> <!-- find better type -->
-          <button id="browse-clear-filters">X Clear All</button>
-          <div id="browse-filter-list">
+          <span id="browse-results" class="font-bold ml-3">Results</span> <!-- find better type -->
+          <button id="browse-clear-filters" class="border rounded-b-sm pl-3 pr-3 cursor-pointer">X Clear All</button>
+          
             <!--populate w/ js. make them clickable to delete single filter?
             like <button>X {filter name}</button>
+            REMOVE markup and replace with JS
             -->
-          </div>
-          <ul class="grid grid-cols-4 gap-1">
+          <ul id="browse-filter-test" class="flex flex-row gap-3 m-3">
+            <li class="border pl-2 pr-2">
+              <button class="cursor-pointer">X</button>
+              <span>Example filter</span>
+            </li>
+          </ul>
+
+          <!--Idk if we need this-->
+          <h1 class="text-center animate-pulse">Loading...</h1>
+
+          <ul id="browse-products-list" class="grid grid-cols-4 gap-1">
             <!--REPLACE THIS MARKUP WITH JS CODE-->
             <li class="bg-white m-2">
               <!--This button activates single product view for corresponding product-->
