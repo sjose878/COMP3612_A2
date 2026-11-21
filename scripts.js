@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const div = document.querySelector("#categories");
         categories.forEach(item => {
             const card = document.createElement("div");
-            card.className = "w-64 px-8 py-5 flex flex-col justify-center text-center items-center";
+            card.className = "snap-start w-64 px-8 py-5 flex flex-col justify-center text-center items-center";
 
             const img = document.createElement("img");
             img.src = "https://cdn.dummyjson.com/product-images/mobile-accessories/amazon-echo-plus/1.webp";
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("#categories-left")
         .addEventListener("click", () => {
         div.scrollBy({
-                left: -280,
+                left: -280 * 2,
                 behavior: "smooth"
             });
         });
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("#categories-right")
         .addEventListener("click", () => {
             div.scrollBy({
-                left: 280,
+                left: 280 * 2,
                 behavior: "smooth"
             });
         });
