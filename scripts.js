@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //all data fetch
     fetch("https://dummyjson.com/products?limit=100")
     .then(data => data.json())
+    .then(data => getCategories(data.products))
 
     const pages = [{button: "home", view: "home"}, {button: "browser", view: "browser"}, {button: "cart", view: "cart"}, {button: "category", view: "category"}, {button: "logo", view: "home"}];
 
@@ -47,5 +48,46 @@ document.addEventListener("DOMContentLoaded", () => {
         pages.forEach(item => document.querySelector(`#view-${item.view}`).classList.add("hidden"));
         document.querySelector("#view-single-product").classList.remove("hidden");
     });
+
+    function getCategories(products) {
+        const categories = new Set([]);
+        products.forEach(item => categories.add(item.category));
+        
+        const div = document.querySelector("#categories");
+        categories.forEach(item => {
+            const card = document.createElement("div");
+            card.className = "w-64 px-8 py-5 flex flex-col justify-center text-center items-center";
+
+            const img = document.createElement("img");
+            img.src = "https://cdn.dummyjson.com/product-images/mobile-accessories/amazon-echo-plus/1.webp";
+            img.className = "rounded-2xl w-48 h-48 object-cover border border-black max-w-max";
+            
+            const button = document.createElement("button");
+            button.textContent = item;
+            button.className = "cursor-pointer hover:underline hover:text-yellow-300";
+            
+            card.appendChild(img);
+            card.appendChild(button);
+            div.appendChild(card);
+        });
+
+        document.querySelector("#categories-left")
+        .addEventListener("click", () => {
+        div.scrollBy({
+                left: -280,
+                behavior: "smooth"
+            });
+        });
+
+        document.querySelector("#categories-right")
+        .addEventListener("click", () => {
+            div.scrollBy({
+                left: 280,
+                behavior: "smooth"
+            });
+        });
+        //card.classList.add("");
+
+    }
     
 });

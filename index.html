@@ -17,7 +17,7 @@
       <nav class="flex justify-center gap-5 font-bold text-2xl">
         <button id="nav-home-button" class="nav-button cursor-pointer hover:underline hover:text-yellow-300">Home</button>
         <button id="nav-browser-button" class="nav-button cursor-pointer hover:underline hover:text-yellow-300">Browse</button>
-        <button id="nav-category-button" class="nav-button cursor-pointer hover:underline hover:text-yellow-300">Category</button>
+        <button id="nav-category-button" class="nav-button cursor-pointer hover:underline hover:text-yellow-300">Categories</button>
         <button id="nav-about-us-button" class="nav-button cursor-pointer hover:underline hover:text-yellow-300">About</button>
       </nav>
       <div class="flex items-center justify-center">
@@ -142,7 +142,11 @@
     <div id="view-category" class="hidden">
       <img id="category-hero-img" src="#" alt="hero img category">
       <h1 id="catogry-title">CATEGORY TITLE 20 27 28</h1>
-      <div class="category-card"></div>
+      <div id="categories" class="flex justify-between -mb-10 overflow-x-auto scrollbar-none"></div>
+      <div id="scroll-categoreis" class="flex justify-between">
+        <button id="categories-left" class="ml-8 text-8xl font-extrabold text-yellow-300">←</button>
+        <button id="categories-right" class="mr-8 text-8xl font-extrabold text-yellow-300">→</button>
+      </div>
     </div>
 
     <!--Single Product View-->
