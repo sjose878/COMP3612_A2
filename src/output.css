@@ -501,6 +501,9 @@
   .grid-cols-\[1fr_5fr\] {
     grid-template-columns: 1fr 5fr;
   }
+  .grid-cols-\[2fr_1fr\] {
+    grid-template-columns: 2fr 1fr;
+  }
   .grid-rows-1 {
     grid-template-rows: repeat(1, minmax(0, 1fr));
   }
@@ -896,6 +899,15 @@
     .hover\:underline:hover {
       text-decoration-line: underline;
     }
+  }
+  .disabled\:cursor-not-allowed:disabled {
+    cursor: not-allowed;
+  }
+  .disabled\:bg-gray-300:disabled {
+    background-color: var(--color-gray-300);
+  }
+  .disabled\:bg-gray-500:disabled {
+    background-color: var(--color-gray-500);
   }
 }
 @property --tw-rotate-x {

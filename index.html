@@ -256,70 +256,84 @@
 
     <!--Cart View-->
     <div id="view-cart" class="hidden">
-      <h1><strong>Shopping Cart</strong></h1>
-      <table id="cart-products" class="table-auto w-full text-left ml-3 mr-3">
-        <thead>
-          <tr>
-            <th colspan="3">Items</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><button class="text-blue-900 font-bold hover:underline">Remove</button></td> <!--Button that removes specific item from cart-->
-            <td><img src="test_img.png" alt="thumbnail" class="max-h-20"></td>
-            <td>Product Title</td>
-            <td>$0.00</td>
-            <td>quantity</td>
-            <td>price*quantity</td>
-          </tr>
-          <tr>
-            <td><button class="text-blue-900 font-bold hover:underline">Remove</button></td> <!--Button that removes specific item from cart-->
-            <td><img src="test_img.png" alt="thumbnail" class="max-h-20 max-w-20"></td>
-            <td>Product Title</td>
-            <td>$0.00</td>
-            <td>quantity</td>
-            <td>price*quantity</td>
-          </tr>
-        </tbody>
-      </table>
-      
-      <form id="cart-checkout-form">
-        <label><strong>Shipping</strong></label>
-        <select id="cart-shipping-choice">
-          <option>Standard</option>
-          <option>Express</option>
-          <option>International</option>
-        </select>
-        <select id="cart-destination-choice">
-          <option>Canada</option>
-          <option>United States</option>
-          <option>International</option>
-        </select>
-        <button type="submit">Checkout</button>
-      </form>
+      <h1 class="text-center text-2xl m-3"><strong>Your Cart</strong></h1>
 
-      <span><strong>Summary</strong></span>
-      <table id="cart-summary">
-         <tr>
-          <td>Merchandise</td>
-          <td id="cart-merch-price">$temp</td>
-         </tr>
-         <tr>
-          <td>Shipping</td>
-          <td id="cart-ship-price">$temp</td>
-         </tr>
-         <tr>
-          <td>Tax</td>
-          <td id="cart-tax-price">$temp</td>
-         </tr>
-         <tr>
-          <td><strong>Tax</strong></td>
-          <td id="cart-total-price"><strong>$temp</strong></td>
-         </tr>
-      </table>
+      <!--Show this when cart is empty, otherwise hide it-->
+      <div id="empty-cart" class="font-bold text-center">Your cart is empty! Go shopping NOW!</div>
+
+      <!--Hide this when cart is empty, otherwise display it -->
+      <div id="cart">
+        <table id="cart-products" class="table-auto w-full text-left ml-3 mr-3">
+          <thead>
+            <tr>
+              <th colspan="3">Items</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--REPLACE with JS that populates table with cart items-->
+            <tr>
+              <td><button class="text-blue-900 font-bold hover:underline">Remove</button></td> <!--Button that removes specific item from cart-->
+              <td><img src="test_img.png" alt="thumbnail" class="max-h-20"></td>
+              <td>Product Title</td>
+              <td>$0.00</td>
+              <td>quantity</td>
+              <td>price*quantity</td>
+            </tr>
+            <tr>
+              <td><button class="text-blue-900 font-bold hover:underline">Remove</button></td> <!--Button that removes specific item from cart-->
+              <td><img src="test_img.png" alt="thumbnail" class="max-h-20 max-w-20"></td>
+              <td>Product Title</td>
+              <td>$0.00</td>
+              <td>quantity</td>
+              <td>price*quantity</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <section class="grid grid-cols-3 place-items-center">
+          <div>
+            <span><strong>Summary</strong></span>
+            <table id="cart-summary" class="border">
+              <tr>
+                <td>Merchandise</td>
+                <td id="cart-merch-price">$temp</td>
+              </tr>
+              <tr>
+                <td>Shipping</td>
+                <td id="cart-ship-price">$temp</td>
+              </tr>
+              <tr>
+                <td>Tax</td>
+                <td id="cart-tax-price">$temp</td>
+              </tr>
+              <tr>
+                <td><strong>Tax</strong></td>
+                <td id="cart-total-price"><strong>$temp</strong></td>
+              </tr>
+            </table>
+          </div>
+
+          <form id="cart-checkout-form" class="bg-gray-200">
+            <label><strong>Shipping</strong></label>
+            <select id="cart-shipping-choice" class="bg-white">
+              <option>Standard</option>
+              <option>Express</option>
+              <option>International</option>
+            </select>
+            <select id="cart-destination-choice">
+              <option>Canada</option>
+              <option>United States</option>
+              <option>International</option>
+            </select>
+          </form>
+
+          <!--Use JS to enable -->
+          <button type="submit" form="cart-checkout-form" disabled class="bg-yellow-300 text-black font-bold rounded-full p-3 cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed">Checkout</button>
+        </section>
+      </div>
     </div>
 
     <!--About Us View-->
