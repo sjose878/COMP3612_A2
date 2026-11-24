@@ -11,6 +11,7 @@
     --color-red-500: oklch(63.7% 0.237 25.331);
     --color-amber-300: oklch(87.9% 0.169 91.605);
     --color-yellow-300: oklch(90.5% 0.182 98.111);
+    --color-yellow-400: oklch(85.2% 0.199 91.936);
     --color-yellow-500: oklch(79.5% 0.184 86.047);
     --color-green-300: oklch(87.1% 0.15 154.449);
     --color-green-500: oklch(72.3% 0.219 149.579);
@@ -222,8 +223,14 @@
   .top-0 {
     top: 0px;
   }
+  .bottom-0 {
+    bottom: 0px;
+  }
   .z-999 {
     z-index: 999;
+  }
+  .z-9999 {
+    z-index: 9999;
   }
   .col-span-2 {
     grid-column: span 2 / span 2;
@@ -372,11 +379,20 @@
   .max-h-50 {
     max-height: calc(var(--spacing) * 50);
   }
+  .max-h-64 {
+    max-height: calc(var(--spacing) * 64);
+  }
   .max-h-100 {
     max-height: calc(var(--spacing) * 100);
   }
   .max-h-150 {
     max-height: calc(var(--spacing) * 150);
+  }
+  .max-h-250 {
+    max-height: calc(var(--spacing) * 250);
+  }
+  .max-h-screen {
+    max-height: 100vh;
   }
   .min-h-screen {
     min-height: 100vh;
@@ -425,6 +441,9 @@
   }
   .min-w-30 {
     min-width: calc(var(--spacing) * 30);
+  }
+  .min-w-full {
+    min-width: 100%;
   }
   .min-w-screen {
     min-width: 100vw;
@@ -634,6 +653,10 @@
   .border-2 {
     border-style: var(--tw-border-style);
     border-width: 2px;
+  }
+  .border-t-2 {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 2px;
   }
   .border-black {
     border-color: var(--color-black);
@@ -933,6 +956,12 @@
     }
     .hover\:bg-blue-950:hover {
       background-color: var(--color-blue-950);
+    }
+    .hover\:bg-yellow-400:hover {
+      background-color: var(--color-yellow-400);
+    }
+    .hover\:bg-yellow-500:hover {
+      background-color: var(--color-yellow-500);
     }
     .hover\:text-black:hover {
       color: var(--color-black);
