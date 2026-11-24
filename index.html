@@ -257,19 +257,27 @@
     <!--Cart View-->
     <div id="view-cart" class="hidden">
       <h1><strong>Shopping Cart</strong></h1>
-      <table id="cart-products" class="table-auto">
+      <table id="cart-products" class="table-auto w-full text-left ml-3 mr-3">
         <thead>
           <tr>
-            <th colspan="3"><strong>Items</strong></th>
-            <th><strong>Price</strong></th>
-            <th><strong>Quantity</strong></th>
-            <th><strong>Subtotal</strong></th>
+            <th colspan="3">Items</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><button>-</button></td>
-            <td><img src="#" alt="thumbnail"></td>
+            <td><button class="text-blue-900 font-bold hover:underline">Remove</button></td> <!--Button that removes specific item from cart-->
+            <td><img src="test_img.png" alt="thumbnail" class="max-h-20"></td>
+            <td>Product Title</td>
+            <td>$0.00</td>
+            <td>quantity</td>
+            <td>price*quantity</td>
+          </tr>
+          <tr>
+            <td><button class="text-blue-900 font-bold hover:underline">Remove</button></td> <!--Button that removes specific item from cart-->
+            <td><img src="test_img.png" alt="thumbnail" class="max-h-20 max-w-20"></td>
             <td>Product Title</td>
             <td>$0.00</td>
             <td>quantity</td>

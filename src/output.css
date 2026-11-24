@@ -24,6 +24,7 @@
     --color-blue-800: oklch(42.4% 0.199 265.638);
     --color-blue-900: oklch(37.9% 0.146 265.522);
     --color-blue-950: oklch(28.2% 0.091 267.935);
+    --color-pink-950: oklch(28.4% 0.109 3.907);
     --color-gray-200: oklch(92.8% 0.006 264.531);
     --color-gray-300: oklch(87.2% 0.01 258.338);
     --color-gray-500: oklch(55.1% 0.027 264.364);
@@ -53,6 +54,7 @@
     --radius-sm: 0.25rem;
     --radius-xl: 0.75rem;
     --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
     --radius-4xl: 2rem;
     --animate-spin: spin 1s linear infinite;
     --animate-ping: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
@@ -274,8 +276,14 @@
   .mt-5 {
     margin-top: calc(var(--spacing) * 5);
   }
+  .mt-10 {
+    margin-top: calc(var(--spacing) * 10);
+  }
   .-mr-7 {
     margin-right: calc(var(--spacing) * -7);
+  }
+  .mr-3 {
+    margin-right: calc(var(--spacing) * 3);
   }
   .mr-5 {
     margin-right: calc(var(--spacing) * 5);
@@ -337,6 +345,9 @@
   .table {
     display: table;
   }
+  .h-3 {
+    height: calc(var(--spacing) * 3);
+  }
   .h-6 {
     height: calc(var(--spacing) * 6);
   }
@@ -349,6 +360,15 @@
   .h-75 {
     height: calc(var(--spacing) * 75);
   }
+  .max-h-20 {
+    max-height: calc(var(--spacing) * 20);
+  }
+  .max-h-25 {
+    max-height: calc(var(--spacing) * 25);
+  }
+  .max-h-50 {
+    max-height: calc(var(--spacing) * 50);
+  }
   .max-h-100 {
     max-height: calc(var(--spacing) * 100);
   }
@@ -357,6 +377,12 @@
   }
   .min-h-screen {
     min-height: 100vh;
+  }
+  .w-3 {
+    width: calc(var(--spacing) * 3);
+  }
+  .w-6 {
+    width: calc(var(--spacing) * 6);
   }
   .w-48 {
     width: calc(var(--spacing) * 48);
@@ -372,6 +398,9 @@
   }
   .max-w-10 {
     max-width: calc(var(--spacing) * 10);
+  }
+  .max-w-20 {
+    max-width: calc(var(--spacing) * 20);
   }
   .max-w-30 {
     max-width: calc(var(--spacing) * 30);
@@ -396,6 +425,9 @@
   }
   .table-auto {
     table-layout: auto;
+  }
+  .table-fixed {
+    table-layout: fixed;
   }
   .border-collapse {
     border-collapse: collapse;
@@ -535,6 +567,9 @@
   .rounded-2xl {
     border-radius: var(--radius-2xl);
   }
+  .rounded-3xl {
+    border-radius: var(--radius-3xl);
+  }
   .rounded-4xl {
     border-radius: var(--radius-4xl);
   }
@@ -583,11 +618,17 @@
   .bg-gray-200 {
     background-color: var(--color-gray-200);
   }
+  .bg-gray-300 {
+    background-color: var(--color-gray-300);
+  }
   .bg-green-300 {
     background-color: var(--color-green-300);
   }
   .bg-green-500 {
     background-color: var(--color-green-500);
+  }
+  .bg-pink-950 {
+    background-color: var(--color-pink-950);
   }
   .bg-red-500 {
     background-color: var(--color-red-500);
@@ -604,15 +645,6 @@
       --tw-gradient-position: to right in oklab;
     }
     background-image: linear-gradient(var(--tw-gradient-stops));
-  }
-  .bg-\[url\(\.\/test_image\.jpg\)\] {
-    background-image: url(./test_image.jpg);
-  }
-  .bg-\[url\(\/test_image\.jpg\)\] {
-    background-image: url(/test_image.jpg);
-  }
-  .bg-\[url\(test_image\.jpg\)\] {
-    background-image: url(test_image.jpg);
   }
   .to-blue-500 {
     --tw-gradient-to: var(--color-blue-500);
@@ -692,6 +724,9 @@
   .pl-3 {
     padding-left: calc(var(--spacing) * 3);
   }
+  .pl-4 {
+    padding-left: calc(var(--spacing) * 4);
+  }
   .pl-5 {
     padding-left: calc(var(--spacing) * 5);
   }
@@ -739,15 +774,6 @@
     font-size: var(--text-lg);
     line-height: var(--tw-leading, var(--text-lg--line-height));
   }
-  .text-\[2rem\] {
-    font-size: 2rem;
-  }
-  .text-\[5em\] {
-    font-size: 5em;
-  }
-  .text-\[5rem\] {
-    font-size: 5rem;
-  }
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
@@ -761,6 +787,9 @@
   }
   .text-black {
     color: var(--color-black);
+  }
+  .text-blue-500 {
+    color: var(--color-blue-500);
   }
   .text-blue-900 {
     color: var(--color-blue-900);
@@ -846,9 +875,6 @@
     background-color: var(--color-gray-200);
   }
   @media (hover: hover) {
-    .hover\:animate-spin:hover {
-      animation: var(--animate-spin);
-    }
     .hover\:bg-blue-600:hover {
       background-color: var(--color-blue-600);
     }
