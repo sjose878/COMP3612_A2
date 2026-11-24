@@ -292,11 +292,11 @@
             </tr>
           </tbody>
         </table>
-        
-        <section class="grid grid-cols-3 place-items-center">
+        <hr>
+        <section class="grid grid-cols-3 place-items-center mb-3">
           <div>
             <span><strong>Summary</strong></span>
-            <table id="cart-summary" class="border">
+            <table id="cart-summary" class="border-separate border-spacing-y-1 border-spacing-x-5 border">
               <tr>
                 <td>Merchandise</td>
                 <td id="cart-merch-price">$temp</td>
@@ -310,28 +310,29 @@
                 <td id="cart-tax-price">$temp</td>
               </tr>
               <tr>
-                <td><strong>Tax</strong></td>
+                <td><strong>Total</strong></td>
                 <td id="cart-total-price"><strong>$temp</strong></td>
               </tr>
             </table>
           </div>
 
-          <form id="cart-checkout-form" class="bg-gray-200">
-            <label><strong>Shipping</strong></label>
-            <select id="cart-shipping-choice" class="bg-white">
+          <form id="cart-checkout-form">
+            <label class="font-bold">Shipping</label>
+            <div class="grid grid-cols-1 bg-gray-200">
+            <select id="cart-shipping-choice" class="bg-white m-3">
               <option>Standard</option>
               <option>Express</option>
               <option>International</option>
             </select>
-            <select id="cart-destination-choice">
+            <select id="cart-destination-choice" class="bg-white m-3">
               <option>Canada</option>
               <option>United States</option>
               <option>International</option>
             </select>
+            </div>
           </form>
 
-          <!--Use JS to enable -->
-          <button type="submit" form="cart-checkout-form" disabled class="bg-yellow-300 text-black font-bold rounded-full p-3 cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed">Checkout</button>
+          <button type="submit" form="cart-checkout-form" class="bg-yellow-300 text-black text-2xl font-bold rounded-full p-4 cursor-pointer">Checkout</button>
         </section>
       </div>
     </div>
