@@ -6,19 +6,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const pages = [{button: "home", view: "home"}, {button: "browser", view: "browser"}, {button: "cart", view: "cart"}, {button: "category", view: "category"}, {button: "logo", view: "home"}];
 
-    function addDialogPopUp() {
-        document.querySelector("#nav-about-us-button")
+    /*
+    Adds event listeners to buttons that will open and close a dialog element.\
+
+    @param: dialog_elem  the dialog element that will be shown when a button is clicked
+    @param: container   the parent element that is hidden when dialog is not shown
+    @param: open_button the button element that will show the dialog when clicked
+    @param: close_button    the button rlrmrnt that will hide the dialog when clicked
+    */
+    function addDialogPopUp(dialog_elem, container, open_button, close_button) {
+        // Add open dialog event
+        document.querySelector(open_button)
         .addEventListener("click", () => {
-            document.querySelector("#view-about-us").classList.remove("hidden");
-            const dialog = document.querySelector("dialog");
+            document.querySelector(container).classList.remove("hidden");
+            const dialog = document.querySelector(dialog_elem);
             dialog.showModal();
         });
-
-        document.querySelector("#close-dialog")
+        // Add close dialog event
+        document.querySelector(close_button)
         .addEventListener("click", () => {
-            const dialog = document.querySelector("dialog");
+            const dialog = document.querySelector(dialog_elem);
             dialog.close();
-            document.querySelector("#view-about-us").classList.add("hidden");
+            document.querySelector(container).classList.add("hidden");
         });
     }
     
@@ -36,8 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.querySelector(`#view-${clicked_page.view}`).classList.remove("hidden");
             });
         }
-
-        addDialogPopUp();
+        // Add dialog popup for about us view
+        addDialogPopUp("#about-us-dialog","#view-about-us","#nav-about-us-button", "#close-dialog");
     }
 
     addHeaderButtonEvents();
