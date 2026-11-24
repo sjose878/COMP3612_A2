@@ -46,10 +46,13 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
         // Add dialog popup for about us view
-        addDialogPopUp("#about-us-dialog","#view-about-us","#nav-about-us-button", "#close-dialog");
+        addDialogPopUp("#about-us-dialog","#view-about-us","#nav-about-us-button", "#about-us-close-dialog");
+        addDialogPopUp("#checkout-toaster dialog", "#checkout-toaster", "#checkout-btn", "#checkout-toaster dialog button");
+
     }
 
     addHeaderButtonEvents();
+    // Add dialog popup for checkout toaster
 
     //TEMP, REMOVE LATER
     document.querySelector("#funny-product-button")
