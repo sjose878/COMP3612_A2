@@ -62,25 +62,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function getCategories(products) {
         const categories = new Set([]);
-        products.forEach(item => categories.add(item.category));
+        const thumbnails = [];
+        products.forEach(item => {
+            const prevSize = categories.size;
+            categories.add(item.category);
+            const newSize = categories.size;
+
+            if (prevSize < newSize) {
+                thumbnails.push(item.thumbnail);
+            }
+        });
         
         const div = document.querySelector("#categories");
+        let i = 0;
         categories.forEach(item => {
-            const card = document.createElement("div");
-            card.className = "snap-start w-64 px-8 py-5 flex flex-col justify-center text-center items-center";
+            const card = document.createElement("button");
+            card.className = "snap-start w-64 px-8 py-5 flex flex-col justify-center text-center items-center hover:drop-shadow-lg/40";
 
             const img = document.createElement("img");
-            img.src = "https://cdn.dummyjson.com/product-images/mobile-accessories/amazon-echo-plus/1.webp";
-            img.className = "rounded-2xl w-48 h-48 object-cover border border-black max-w-max";
+            img.src = thumbnails[i];
+            img.className = "rounded-2xl w-48 h-48 object-cover max-w-max";
             
-            const button = document.createElement("button");
-            button.textContent = item;
-            button.className = "cursor-pointer hover:underline hover:text-yellow-300";
+            const p = document.createElement("p");
+            p.textContent = item.charAt(0).toUpperCase() + item.replace("-", " ").slice(1); // https://www.w3schools.com/jsref/jsref_replace.asp, https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript 
+            p.className = "cursor-pointer hover:underline hover:text-yellow-300";
+
+            card.addEventListener("click", () => {
+                alert(`you clicked ${p.textContent}`)
+                // replace with category filter later
+            });
             
             card.appendChild(img);
-            card.appendChild(button);
+            card.appendChild(p);
             div.appendChild(card);
+            i++;
         });
+
+        // https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollBy 
 
         document.querySelector("#categories-left")
         .addEventListener("click", () => {
