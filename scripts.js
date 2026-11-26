@@ -251,6 +251,11 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("#single-product-desc")
         .textContent = product.description;
 
+        // Add to cart button event
+        const addToCartBtn = document.querySelector("#single-product-form button");
+        // Maybe add a JSON file of product details as button data attribute?
+        addToCartBtn.dataset.product = product.title;
+        addToCartBtn.addEventListener("click", addToCart);
         // reviews
 
         /*                         <div>
