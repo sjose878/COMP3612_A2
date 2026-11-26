@@ -54,6 +54,33 @@ document.addEventListener("DOMContentLoaded", () => {
     // Add dialog popup for checkout toaster
     addDialogPopUp("#checkout-toaster dialog", "#checkout-toaster", "#checkout-btn", "#checkout-toaster dialog button");
 
+    /* 
+    Displays a toaster notification for a couple of seconds.
+    Function taken from lab09b-ex5
+    
+    */
+    function toasterHandler(toaster, message) {
+        console.log("toaster handler msg:" + message);
+        const t = document.querySelector(toaster);
+        t.classList.remove("hidden")
+        t.textContent = message;
+
+        // hide toaster after 1 seconds
+        setTimeout(() => { 
+            t.classList.add("hidden"); 
+        },4000); 
+    }
+
+    /*
+    PLACEHOLDER addToCart function needed for toaster
+    */
+    function addToCart(e) {
+        const btn = e.target;
+        const prod_title = btn.dataset.product;
+        // Display toaster notification when button is clicked.
+        toasterHandler("#toast-add-to-cart", `${prod_title} added to cart`);
+    }
+
     function addCategories(categories, thumbnails) {              
         const div = document.querySelector("#categories");
         let i = 0;
@@ -144,6 +171,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const cart_button = document.createElement("button");
             cart_button.className = "mt-auto bg-blue-700 text-white font-bold rounded-full w-full mt-2 mb-2 cursor-pointer hover:bg-blue-800";
             cart_button.textContent = "+ Add";
+            // addToCart event is attached to button
+            cart_button.dataset.product = item.title;
+            cart_button.addEventListener("click", addToCart);
 
             product_button.addEventListener("click", () => {
                 addProductPage(item);
