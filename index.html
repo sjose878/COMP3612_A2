@@ -312,14 +312,6 @@
           <button id="checkout-btn" type="button" form="cart-checkout-form" class="bg-yellow-300 text-black text-2xl font-bold rounded-full p-4 cursor-pointer hover:bg-yellow-400">Checkout</button>
         </section>
       </div>
-
-      <div id="checkout-toaster" class="hidden">
-        <dialog class="p-11 m-auto rounded-2xl">
-          <h1 class="font-bold italic text-6xl text-white pb-5 bg-blue-500 p-4 rounded-xl">Order placed!</h1>
-          <p class="font-bold">Shipping 30 million wasps to your location</p>
-          <button class="cursor-pointer text-base font-bold text-white bg-blue-500 rounded-xl hover:bg-blue-600">Okay</button>
-        </dialog>
-      </div>
     </div>
 
     <!--About Us View-->
@@ -359,8 +351,8 @@
 
     <!--Toaster notifications-->
     <div id="toasters">
-      <div id="toast-add-to-cart" class="hidden fixed z-1000 border rounded-xl w-fit pt-2 pr-5 pb-2 pl-5 top-22.5 left-1/2 -translate-x-1/2 text-white bg-gray-700">Product added to cart</div>
-      <div id="toast-checkout" class="hidden fixed z-1000 border rounded-xl w-fit pt-2 pr-5 pb-2 pl-5 top-30 left-1/2 -translate-x-1/2 text-white bg-gray-700">Order confirmed!</div>
+      <div id="toast-add-to-cart" class="hidden fixed z-1000 border rounded-xl shadow-2xl/50 w-fit pt-2 pr-5 pb-2 pl-5 top-22.5 left-1/2 -translate-x-1/2 text-white bg-gray-700">Product added to cart</div>
+      <div id="toast-checkout" class="hidden fixed z-1000 border rounded-xl shadow-2xl/50 w-fit pt-2 pr-5 pb-2 pl-5 top-40 left-1/2 -translate-x-1/2 text-5xl text-white bg-gray-700">Order placed!</div>
     </div>
   </body>
 </html>

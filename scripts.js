@@ -51,8 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     addHeaderButtonEvents();
-    // Add dialog popup for checkout toaster
-    addDialogPopUp("#checkout-toaster dialog", "#checkout-toaster", "#checkout-btn", "#checkout-toaster dialog button");
+    // Add checkout event to checkout button. Place this in a function??
+    const checkout_btn = document.querySelector("#checkout-btn");
+    checkout_btn.addEventListener("click", checkout);
 
     /* 
     Displays a toaster notification for a couple of seconds.
@@ -88,14 +89,10 @@ document.addEventListener("DOMContentLoaded", () => {
     PLACEHOLDER function for checkout toaster
     requirements: display toast, clear cart, return to home view
     */
-    function checkout() {
-        const btn = document.querySelector("#checkout-btn");
+    function checkout(e) {
         toasterHandler("#toast-checkout", "Order placed!");
     }
-
-    // Add checkout event to checkout button. Place this in a function??
-    const checkout_btn = document.querySelector("#checkout_btn");
-    checkout_btn.addEventListener("click", checkout);
+        
 
     function addCategories(categories, thumbnails) {              
         const div = document.querySelector("#categories");
