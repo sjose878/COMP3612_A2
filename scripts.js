@@ -146,6 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cart_button.textContent = "+ Add";
 
             product_button.addEventListener("click", () => {
+                addProductPage(item);
                 pages.forEach(item => document.querySelector(`#view-${item.view}`).classList.add("hidden"));
                 document.querySelector("#view-single-product").classList.remove("hidden");
             });
@@ -157,6 +158,119 @@ document.addEventListener("DOMContentLoaded", () => {
             li.appendChild(cart_button);
             ul.appendChild(li);
         });
+    }
+
+    function addProductPage(product) {
+        document.querySelector("#nav-single-product-category")
+        .textContent = product.category.charAt(0).toUpperCase() + product.category.replace("-", " ").slice(1);;
+        
+        document.querySelector("#nav-single-product-title")
+        .textContent = product.title;
+
+        document.querySelector("#single-product-img")
+        .src = product.images[0];
+
+        document.querySelector("#single-product-title")
+        .textContent = product.title;
+
+        document.querySelector("#single-product-price")
+        .textContent = "$" + product.price;
+
+        document.querySelector("#single-product-sku")
+        .textContent = product.sku;
+
+        const rating_num = Math.round(product.rating);   
+        let stars = "";
+
+        for (let i = 1; i <= 5; i++) {
+            if (i <= rating_num) {
+                stars += "★";
+            } else {
+                stars += "☆";
+            }
+        }
+
+        document.querySelector("#single-product-rating")
+        .textContent = stars;
+
+        const tags_div = document.querySelector("#single-product-tags");
+
+        product.tags.forEach(tag => {
+            const tag_span = document.createElement("span");
+            tag_span.className = "border pl-2 pr-2";
+            tag_span.textContent = tag;
+            tags_div.appendChild(tag_span);
+        });
+
+        document.querySelector("#single-product-stock")
+        .textContent = product.availabilityStatus;
+
+        document.querySelector("#single-product-desc")
+        .textContent = product.description;
+
+        // reviews
+
+        /*                         <div>
+                          <span class="text-yellow-500 pl-3"># of &#9733;</span>
+                          <span class="text-gray-500">2026-11-17</span>
+                          <p class="font-bold pl-3">Horror Skunx</p>
+                          <p class="pl-3">Very bad product it stole my brain</p>
+                          <hr>
+                        </div> */
+        const reviews_ul = document.querySelector("#products-reviews");
+
+        product.reviews.forEach(review => {
+            const li = document.createElement("li");
+
+            const rating = document.createElement("span");
+            rating.className = "inline-block text-yellow-500 pl-3 pt-2 text-2xl";
+
+            const review_rating_num = Math.round(review.rating);   
+            let stars = "";
+
+            for (let i = 1; i <= 5; i++) {
+                if (i <= review_rating_num) {
+                    stars += "★";
+                } else {
+                    stars += "☆";
+                }
+            }
+
+            rating.textContent = stars;
+
+            const date = document.createElement("span");
+            date.className = "text-gray-500 pl-2";
+            date.textContent = new Date(review.date);
+
+            const name = document.createElement("p");
+            name.className = "font-bold pl-3 pb-2";
+            name.textContent = review.reviewerName;
+
+            const email = document.createElement("span");
+            email.className = "font-normal italic pl-3";
+            email.textContent = "(" + review.reviewerEmail + ")";
+
+            const comment = document.createElement("p");
+            comment.className = "pl-3 pb-5";
+            comment.textContent = review.comment;
+
+            const hr = document.createElement("hr");
+            hr.className = "ml-3 mr-3"
+
+            li.appendChild(rating);
+            li.appendChild(date);
+            name.append(email);
+            li.appendChild(name);
+            //li.appendChild(email);
+            li.appendChild(comment);
+            reviews_ul.appendChild(li);
+            reviews_ul.appendChild(hr);
+
+        });
+
+        // get rid of extra hr
+        reviews_ul.lastElementChild.remove();
+
     }
     
 });

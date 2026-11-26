@@ -138,17 +138,7 @@
           </ul>
 
           <ul id="browse-products-list" class="grid grid-cols-4 gap-1">
-            <!--REPLACE THIS MARKUP WITH JS CODE-->
-            <!-- <li class="bg-white m-2 p-1">
-              This button activates single product view for corresponding product
-              <button class="grid grid-cols-1 text-left p-2 cursor-pointer">
-                <img src="test_thumbnail.jpg" alt="thumbnail" class="">
-                <p>Flinstones Vitamin Gummies</p>
-                <p class="font-bold">Price</p>
-              </button>
-              This button adds the product to cart
-              <button class="bg-blue-700 text-white font-bold rounded-full w-full mt-2 mb-2 cursor-pointer hover:bg-blue-800">+ Add</button>
-            </li> -->
+            <!--Updated w/ JS-->
           </ul>
         </main>
       </div>
@@ -172,25 +162,25 @@
         <nav class="m-5">
             <a href="#" class="underline text-gray-500 hover:text-black">Home</a>
             <span>></span>
-            <a href="#" class="breadcrumb underline text-gray-500 hover:text-black">JS Category Name</a>
+            <a id="nav-single-product-category"href="#" class="breadcrumb underline text-gray-500 hover:text-black"></a>
             <span>></span>
-            <span class="breadcrumb font-bold">product.title</span>
+            <span id="nav-single-product-title"class="breadcrumb font-bold"></span>
         </nav>
+
         <section id="single-product-hero" class="grid grid-cols-2 gap-4 m-5">
             <figure class="grid place-content-center">
-                <img src="test_image.jpg" alt="Product image" class="max-w-100">
+                <img id="single-product-img" src="test_image.jpg" alt="Product image" class="max-w-100">
             </figure>
+
             <aside>
-                <h1 id="single-product-title" class="text-4xl font-bold pt-3 pb-5">INSERT PRODUCT TITLE</h1>
-                <h2 id="single-product-price" class="text-2xl font-bold">Product $Price</h2>
-                <p id="single-product-sku">SKU</p>
-                <div class="single-product-stars text-yellow-500">Insert # of &#9733;</div>
-                <div id="single-product-tags" class="pt-3">
-                  <span class="border pl-2 pr-2">Example tag1</span>
-                  <span class="border pl-2 pr-2">Example tag2</span>
-                </div>
-                <p id="single-product-stock" class="pt-3"> In/Out of stock</p>
-                <p id="single-product-desc" class="pt-3">Insert product description</p>
+                <h1 id="single-product-title" class="text-4xl font-bold pt-3 pb-5"></h1>
+                <h2 id="single-product-price" class="text-2xl font-bold"></h2>
+                <p id="single-product-sku"></p>
+                <div id="single-product-rating" class="single-product-stars text-yellow-500"></div>
+                <div id="single-product-tags" class="pt-3 flex gap-3"></div>
+                <p id="single-product-stock" class="pt-3 italic"></p>
+                <p id="single-product-desc" class="pt-3 pb-4"></p>
+
                 <form class="border p-3 max-w-75">
                     <label>Quantity</label>
                     <input type="number" value="1" min="1" class="border max-w-30"><br>
@@ -225,12 +215,12 @@
                     </tbody>    
                 </table>
             </div>
+
             <!--Reviews-->
             <div id="single-product-reviews" class="border">
                 <ul id="products-reviews" class="h-75 overflow-y-auto">
-                    <li>
                         <!--REPLACE with JS to add reviews-->
-                        <div>
+                        <!-- <div>
                           <span class="text-yellow-500 pl-3"># of &#9733;</span>
                           <span class="text-gray-500">2026-11-17</span>
                           <p class="font-bold pl-3">Horror Skunx</p>
@@ -243,8 +233,7 @@
                           <p class="font-bold pl-3">The Aura Farmer</p>
                           <p class="pl-3">Love my husband</p>
                           <hr>
-                        </div>
-                    </li>
+                        </div> -->
                 </ul>
             </div>
         </section>
