@@ -58,6 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
     Displays a toaster notification for a couple of seconds.
     Function taken from lab09b-ex5
     
+    @param: toaster the div that represents the toaster notification
+    @param: message the message that will be displayed in the toaster
     */
     function toasterHandler(toaster, message) {
         console.log("toaster handler msg:" + message);
@@ -65,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
         t.classList.remove("hidden")
         t.textContent = message;
 
-        // hide toaster after 1 seconds
+        // hide toaster after 4 seconds
         setTimeout(() => { 
             t.classList.add("hidden"); 
         },4000); 
@@ -73,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /*
     PLACEHOLDER addToCart function needed for toaster
+    requirements: update cart
     */
     function addToCart(e) {
         const btn = e.target;
@@ -80,6 +83,19 @@ document.addEventListener("DOMContentLoaded", () => {
         // Display toaster notification when button is clicked.
         toasterHandler("#toast-add-to-cart", `${prod_title} added to cart`);
     }
+
+    /*
+    PLACEHOLDER function for checkout toaster
+    requirements: display toast, clear cart, return to home view
+    */
+    function checkout() {
+        const btn = document.querySelector("#checkout-btn");
+        toasterHandler("#toast-checkout", "Order placed!");
+    }
+
+    // Add checkout event to checkout button. Place this in a function??
+    const checkout_btn = document.querySelector("#checkout_btn");
+    checkout_btn.addEventListener("click", checkout);
 
     function addCategories(categories, thumbnails) {              
         const div = document.querySelector("#categories");
