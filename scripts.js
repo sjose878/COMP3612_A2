@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
 
     const pages = [{button: "home", view: "home"}, {button: "browser", view: "browser"}, {button: "cart", view: "cart"}, {button: "category", view: "category"}, {button: "logo", view: "home"}];
+    const cart = retrieveCartStorage();
 
     /*
     Adds event listeners to buttons that will open and close a dialog element.\
@@ -96,6 +97,34 @@ document.addEventListener("DOMContentLoaded", () => {
         // Display toaster notification when button is clicked.
         toasterHandler("#toast-add-to-cart", `${prod_title} added to cart`);
     }
+
+    /*
+    Retrieves shopping cart from local storage. Sets cart to empty array if not in localStorage.
+    Taken from lab10-ex11
+    */
+    function retrieveCartStorage() {        
+        return JSON.parse(localStorage.getItem('cart'))
+                        || []; // Return empty array if key value does not exist
+    }
+
+    /*
+    Updates localStorage with current cart.
+    Taken from lab10-ex11
+    */
+    function updateCartStorage() {
+        localStorage.setItem('cart',
+            JSON.stringify(schemeCollection));
+    }
+    
+    /*
+    Removes cart from localStorage
+    Taken from lab10-ex11
+    */
+    function removeCartStorage() {
+        localStorage.removeItem('cart');
+    }    
+
+
 
     /*
     PLACEHOLDER function for checkout toaster
