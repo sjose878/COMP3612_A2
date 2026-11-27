@@ -20,8 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
     
 
     const pages = [{button: "home", view: "home"}, {button: "browser", view: "browser"}, {button: "cart", view: "cart"}, {button: "category", view: "category"}, {button: "logo", view: "home"}];
-    //const cart = retrieveCartStorage();
-    const cart = [];
+    const cart = retrieveCartStorage();
+    console.log(cart);
+    //const cart = [];
     /*
     Adds event listeners to buttons that will open and close a dialog element.\
 
@@ -125,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cart.push(item);
         }  
         // Update localStorage
-        //updateCartStorage();
+        updateCartStorage();
         // Update display for cart view
         updateCartView();
         // Display toaster notification when button is clicked.
@@ -145,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const td_btn = document.createElement("td");
             const btn = document.createElement("button");
             btn.textContent = "Remove";
-            btn.classList.add("text-blue-900", "font-bold", "hover:underline");
+            btn.classList.add("text-blue-900", "font-bold", "cursor-pointer", "hover:underline");
 
             const td_img = document.createElement("td");
             const img = document.createElement("img");
@@ -169,7 +170,6 @@ document.addEventListener("DOMContentLoaded", () => {
             tr.appendChild(td_price);
             tr.appendChild(td_quantity);
             tr.appendChild(td_subtotal);
-            console.log(item.subtotal);
             tbody.appendChild(tr);
         }
     }
@@ -179,7 +179,12 @@ document.addEventListener("DOMContentLoaded", () => {
     Taken from lab10-ex11
     */
     function retrieveCartStorage() {        
-        return JSON.parse(localStorage.getItem('cart'))
+        // Recreate CartItem instance after decoding from JSON
+        return JSON.parse(localStorage.getItem('cart')).map(item => {
+            const cartItem = new CartItem(item.thumbnail, item.title, item.price, item.sku);
+            cartItem.quantity = item.quantity;
+            return cartItem;
+        })
                         || []; // Return empty array if key value does not exist
     }
 
@@ -206,7 +211,6 @@ document.addEventListener("DOMContentLoaded", () => {
     Then addToCart event is assigned to button.
     */
     function setUpAddToCartHandler(btn, product) {
-        console.log("setUpAddToCartHandler ran")
         btn.dataset.thumbnail = product.thumbnail;
         btn.dataset.title = product.title;
         btn.dataset.price = product.price;
@@ -223,6 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
         toasterHandler("#toast-checkout", "Order placed!");
         // clear cart
         removeCartStorage();
+        updateCartView();
         // Return to home view
 
     }
