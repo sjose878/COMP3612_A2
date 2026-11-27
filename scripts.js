@@ -343,6 +343,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // get rid of extra hr
         reviews_ul.lastElementChild.remove();
 
+        document.querySelector("#single-product-quantity").value = 1; //reset quantity num
+
         // specification values: "weight", "dimensions" -> .width, .height, .depth, "warrantyInformation", "shippingInformation", "returnPolicy"
         // specifications 
 
