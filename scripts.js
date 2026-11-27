@@ -107,6 +107,13 @@ document.addEventListener("DOMContentLoaded", () => {
     /*
     Event handler that adds a specific product to cart.
     Add to cart button will update cart and cart-view markup
+
+    NEEDS ADDRESSING:
+    -localStorage
+    -updateCartView at the start?
+    -Remove button
+    -Update Summary/Shipping
+    -Adding multiple products at once
     */
     function addToCart(e) {
         // Don't try submitting to server
@@ -151,6 +158,15 @@ document.addEventListener("DOMContentLoaded", () => {
             shopping_cart.classList.remove("hidden");
         }
 
+        // Update header cart number
+        const num_items_span = document.querySelector("#num-cart-items");
+        let num_items = 0;
+        for (let item of cart) {
+            console.log(item.quantity);
+            num_items += item.quantity;
+        }
+        num_items_span.textContent = num_items;
+
         // Add markup for cart list
         const tbody = document.querySelector("#cart-products tbody");
         tbody.innerHTML = "";
@@ -171,11 +187,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const td_title = document.createElement("td")
             td_title.textContent = item.title;;
             const td_price = document.createElement("td");
-            td_price.textContent = item.price;
+            td_price.textContent = `$${item.price}`;
             const td_quantity = document.createElement("td");
             td_quantity.textContent = item.quantity;
             const td_subtotal = document.createElement("td");
-            td_subtotal.textContent = item.subtotal();
+            td_subtotal.textContent = `$${item.subtotal().toFixed(2)}`;
             td_btn.appendChild(btn);
             tr.appendChild(td_btn);
             td_img.appendChild(img);
@@ -249,7 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         updateCartView();
         // Return to home view
-
+        // ADDRESS ME
     }
 
     // Adds the checkout event handler to checkout button.
