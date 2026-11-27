@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const img_dots = document.querySelector("#img_num");
         img_dots.textContent = "•".repeat(product.images.length);
-        img_dots.className = "text-gray-500 -mt-9 text-5xl"
+        img_dots.className = "text-gray-500 -mt-8 text-5xl"
 
 
         document.querySelector("#single-product-title")
