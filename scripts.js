@@ -20,8 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
 
     const pages = [{button: "home", view: "home"}, {button: "browser", view: "browser"}, {button: "cart", view: "cart"}, {button: "category", view: "category"}, {button: "logo", view: "home"}];
-    const cart = retrieveCartStorage();
-
+    //const cart = retrieveCartStorage();
+    const cart = [];
     /*
     Adds event listeners to buttons that will open and close a dialog element.\
 
@@ -96,7 +96,9 @@ document.addEventListener("DOMContentLoaded", () => {
         this.price = price;
         this.sku = sku;
         this.quantity = 1; // Declaration of new CartItem implies having a CartItem
-        this.subtotal = () => this.price * this.quantity;
+        this.subtotal = () => {
+            return this.price * this.quantity;
+        };
     }
 
     /*
@@ -123,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cart.push(item);
         }  
         // Update localStorage
-        updateCartStorage();
+        //updateCartStorage();
         // Update display for cart view
         updateCartView();
         // Display toaster notification when button is clicked.
@@ -135,8 +137,9 @@ document.addEventListener("DOMContentLoaded", () => {
     Go through cart array to get product details.
     */
     function updateCartView() {
+        const tbody = document.querySelector("#cart-products tbody");
+        tbody.innerHTML = "";
         for (let item of cart) {
-            const tbody = document.querySelector("#cart-products tbody");
             const tr = document.createElement("tr");
 
             const td_btn = document.createElement("td");
@@ -150,14 +153,14 @@ document.addEventListener("DOMContentLoaded", () => {
             img.alt = item.title;
             img.classList.add("max-h-20");
 
-            const td_title = document.createElement("td");
-            td_title.textContent = item.title;
+            const td_title = document.createElement("td")
+            td_title.textContent = item.title;;
             const td_price = document.createElement("td");
             td_price.textContent = item.price;
             const td_quantity = document.createElement("td");
             td_quantity.textContent = item.quantity;
             const td_subtotal = document.createElement("td");
-            td_subtotal.textContent = item.subtotal;
+            td_subtotal.textContent = item.subtotal();
             td_btn.appendChild(btn);
             tr.appendChild(td_btn);
             td_img.appendChild(img);
@@ -166,6 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
             tr.appendChild(td_price);
             tr.appendChild(td_quantity);
             tr.appendChild(td_subtotal);
+            console.log(item.subtotal);
             tbody.appendChild(tr);
         }
     }
