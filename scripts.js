@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         product.tags.forEach(tag => {
             const tag_span = document.createElement("span");
-            tag_span.className = "border pl-2 pr-2";
+            tag_span.className = "border px-2 rounded-lg bg-gray-200";
             tag_span.textContent = tag;
             tags_div.appendChild(tag_span);
         });
