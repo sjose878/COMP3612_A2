@@ -92,23 +92,22 @@ document.addEventListener("DOMContentLoaded", () => {
     requirements: update cart
     */
     function addToCart(e) {
+        // Don't try submitting to server
+        e.preventDefault();
+        // Get product data
         const btn = e.target;
-        const prod_thumbnail = btn.dataset.thumbnail;
-        const prod_title = btn.dataset.title;
-        const prod_price = btn.dataset.price;
+        const thumbnail = btn.dataset.thumbnail;
+        const title = btn.dataset.title;
+        const price = btn.dataset.price;
 
-        //Get product data
-
-        //Create cart item object
-        let cartItem = [];
-        /*
+        //Create cart item object    
         let cartItem = {
-            thumbnail:
-            title:
-            price:
-            quantity:
+            thumbnail: thumbnail,
+            title: title,
+            price: price,
+            quantity: 1
         }
-            */
+
         // Add cart item to cart array
         // Only add if item is already in cart, otherwise increase quantity.
         cart.push(cartItem);
@@ -372,11 +371,9 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("#single-product-desc")
         .textContent = product.description;
 
-        // Add to cart button event
+        // Add to cart button event handler
         const addToCartBtn = document.querySelector("#single-product-form button");
-        // Maybe add a JSON file of product details as button data attribute?
-        addToCartBtn.dataset.product = product.title;
-        addToCartBtn.addEventListener("click", addToCart);
+        setUpAddToCartHandler(addToCartBtn, product);
 
         // reviews
         const reviews_ul = document.querySelector("#products-reviews");
