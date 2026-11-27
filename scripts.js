@@ -94,8 +94,31 @@ document.addEventListener("DOMContentLoaded", () => {
     function addToCart(e) {
         const btn = e.target;
         const prod_title = btn.dataset.product;
+
+        //Get product data
+
+        // Add to cart array
+        
+        // Add markup to list
+
+        updateCartView();
         // Display toaster notification when button is clicked.
         toasterHandler("#toast-add-to-cart", `${prod_title} added to cart`);
+    }
+
+    /*
+    Update markup of list of products in cart.
+    Go through cart array to get product details.
+    */
+    function updateCartView() {
+        const tbody = document.querySelector("#cart-products tbody");
+        const tr = document.createElement("tr");
+        const cart_btn = document.createElement("button");
+        cart_btn.textContent = "Test";
+
+        tr.appendChild(cart_btn);
+
+        tbody.appendChild(tr);
     }
 
     /*
@@ -113,9 +136,9 @@ document.addEventListener("DOMContentLoaded", () => {
     */
     function updateCartStorage() {
         localStorage.setItem('cart',
-            JSON.stringify(schemeCollection));
+            JSON.stringify(cart));
     }
-    
+
     /*
     Removes cart from localStorage
     Taken from lab10-ex11
@@ -124,14 +147,17 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem('cart');
     }    
 
-
-
     /*
     PLACEHOLDER function for checkout toaster
     requirements: display toast, clear cart, return to home view
     */
     function checkout(e) {
+        // Display toast notification
         toasterHandler("#toast-checkout", "Order placed!");
+        // clear cart
+        removeCartStorage();
+        // Return to home view
+
     }
         
 
