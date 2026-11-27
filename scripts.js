@@ -210,8 +210,37 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("#nav-single-product-title")
         .textContent = product.title;
 
+        let img_i = 0; 
         document.querySelector("#single-product-img")
-        .src = product.images[0];
+        .src = product.images[img_i];
+
+         /* <button id="single-product-left" class="-mt-25 text-8xl font-extrabold text-yellow-300 hover:text-yellow-500">←</button>
+                <button id="single-product-right" class="-mt-25 text-8xl font-extrabold text-yellow-300 hover:text-yellow-500">→</button> */
+
+        document.querySelector("#single-product-left").addEventListener("click", () => {
+            img_i -= 1;
+            if (img_i < 0) {
+                img_i = product.images.length - 1;
+            };
+
+            document.querySelector("#single-product-img")
+            .src = product.images[img_i];
+        });
+
+        document.querySelector("#single-product-right").addEventListener("click", () => {
+            img_i += 1;
+            if (img_i >= product.images.length) {
+                img_i = 0;
+            };
+
+            document.querySelector("#single-product-img")
+            .src = product.images[img_i];
+        });
+
+        const img_dots = document.querySelector("#img_num");
+        img_dots.textContent = "•".repeat(product.images.length);
+        img_dots.className = "text-gray-500 -mt-9 text-5xl"
+
 
         document.querySelector("#single-product-title")
         .textContent = product.title;
@@ -237,6 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .textContent = stars;
 
         const tags_div = document.querySelector("#single-product-tags");
+        tags_div.innerHTML = "";
 
         product.tags.forEach(tag => {
             const tag_span = document.createElement("span");
@@ -364,10 +394,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.querySelector("#specifications").classList.add("hidden");
                 document.querySelector("#single-product-reviews")
                 .classList.remove("hidden");
-
                 
             };
         });
+
+    
     };
     
 });
