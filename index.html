@@ -10,7 +10,7 @@
 
   <body id="page-top">
     <!--Header-->
-    <header class="grid grid-cols-[1fr_3fr_1fr] place-content-around bg-blue-600 text-white p-3 sticky top-0 z-999">
+    <header class="grid grid-cols-[1fr_3fr_1fr] place-content-around bg-blue-600 text-white p-3 sticky top-0 z-1000">
       <div>
         <button id="nav-logo-button" class="text-yellow-300 text-6xl font-bold text-left cursor-pointer">WM&#9788;</button>
       </div>
@@ -226,10 +226,10 @@
       <h1 class="text-center text-2xl m-3"><strong>Your Cart</strong></h1>
 
       <!--Show this when cart is empty, otherwise hide it-->
-      <div id="empty-cart" class="font-bold text-center">Your cart is empty! Go shopping NOW!</div>
+      <div id="empty-cart" class="font-bold text-center min-h-screen">Your cart is empty! Go shopping NOW!</div>
 
       <!--Hide this when cart is empty, otherwise display it -->
-      <div id="cart">
+      <div id="cart" class="hidden min-h-screen">
         <table id="cart-products" class="table-auto w-full text-left ml-3 mr-3 mb-3">
           <thead>
             <tr>

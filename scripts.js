@@ -20,9 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
     
 
     const pages = [{button: "home", view: "home"}, {button: "browser", view: "browser"}, {button: "cart", view: "cart"}, {button: "category", view: "category"}, {button: "logo", view: "home"}];
-    const cart = retrieveCartStorage();
-    console.log(cart);
-    //const cart = [];
+
+    // localStorage version
+    //const cart = retrieveCartStorage();
+    // No localStorage for testing.
+    const cart = [];
     /*
     Adds event listeners to buttons that will open and close a dialog element.\
 
@@ -103,8 +105,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-    PLACEHOLDER addToCart function needed for toaster
-    requirements: update cart
+    Event handler that adds a specific product to cart.
+    Add to cart button will update cart and cart-view markup
     */
     function addToCart(e) {
         // Don't try submitting to server
@@ -126,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cart.push(item);
         }  
         // Update localStorage
-        updateCartStorage();
+        //updateCartStorage();
         // Update display for cart view
         updateCartView();
         // Display toaster notification when button is clicked.
@@ -138,6 +140,18 @@ document.addEventListener("DOMContentLoaded", () => {
     Go through cart array to get product details.
     */
     function updateCartView() {
+        // Either show the cart or a message saying there is no items or cart.
+        const empty_cart_msg = document.querySelector("#empty-cart");
+        const shopping_cart = document.querySelector("#cart");
+        if (cart.length == 0) {
+            empty_cart_msg.classList.remove("hidden");
+            shopping_cart.classList.add("hidden");
+        } else {
+            empty_cart_msg.classList.add("hidden");
+            shopping_cart.classList.remove("hidden");
+        }
+
+        // Add markup for cart list
         const tbody = document.querySelector("#cart-products tbody");
         tbody.innerHTML = "";
         for (let item of cart) {
@@ -225,13 +239,25 @@ document.addEventListener("DOMContentLoaded", () => {
     function checkout(e) {
         // Display toast notification
         toasterHandler("#toast-checkout", "Order placed!");
+
         // clear cart
         removeCartStorage();
+        // TEMPORARY non-localStorage ver
+        while (cart.length > 0) {
+            cart.pop();
+        }
+
         updateCartView();
         // Return to home view
 
     }
-        
+
+    // Adds the checkout event handler to checkout button.
+    function setUpCheckoutHandler() {
+        const btn = document.querySelector("#checkout-btn");
+        btn.addEventListener("click", checkout);
+    }
+    setUpCheckoutHandler();
 
     function addCategories(categories, thumbnails) {              
         const div = document.querySelector("#categories");
