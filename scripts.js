@@ -88,6 +88,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
+    Constructor for Cart Item object. 
+    */
+    function CartItem(thumbnail, title, price, sku) {
+        this.thumbnail = thumbnail;
+        this.title = title;
+        this.price = price;
+        this.sku = sku;
+        this.quantity = 1; // Declaration of new CartItem implies having a CartItem
+        
+        this.subtotal = () => this.price * this.quantity;
+    }
+
+    /*
     PLACEHOLDER addToCart function needed for toaster
     requirements: update cart
     */
@@ -96,20 +109,25 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         // Get product data
         const btn = e.target;
-        const thumbnail = btn.dataset.thumbnail;
-        const title = btn.dataset.title;
-        const price = btn.dataset.price;
+        let thumbnail = btn.dataset.thumbnail;
+        let title = btn.dataset.title;
+        let price = btn.dataset.price;
+        let sku = btn.dataset.sku;
 
-        //Create cart item object    
-        let cartItem = {
+        // Only add item to cart array if item isn't already cart. Otherwise increase quantity.
+        let match = cart.find(c => c.sku === sku);
+        if (match) {
+
+        } else {
+            //Create cart item object  
+            let cartItem = {
             thumbnail: thumbnail,
             title: title,
             price: price,
             quantity: 1
-        }
+            } 
+        }  
 
-        // Add cart item to cart array
-        // Only add if item is already in cart, otherwise increase quantity.
         cart.push(cartItem);
         // Add markup to list
         updateCartView();
@@ -160,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     /*
     Helper function for adding event handler: addToCart
-    Puts product thumbnail, title, and price as data attributes for a button.
+    Puts product thumbnail, title, price, and sku as data attributes for a button.
     Then addToCart event is assigned to button.
     */
     function setUpAddToCartHandler(btn, product) {
@@ -168,6 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.dataset.thumbnail = product.thumbnail;
         btn.dataset.title = product.title;
         btn.dataset.price = product.price;
+        btn.dataset.sku = product.sku;
         btn.addEventListener("click", addToCart);
     }
 
