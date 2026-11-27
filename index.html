@@ -178,7 +178,7 @@
                 <p id="single-product-sku"></p>
                 <div id="single-product-rating" class="single-product-stars text-yellow-500"></div>
                 <div id="single-product-tags" class="pt-3 flex gap-3"></div>
-                <p id="single-product-stock" class="pt-3 italic"></p>
+                <p id="single-product-stock" class="pt-3 italic text-gray-500"></p>
                 <p id="single-product-desc" class="pt-3 pb-4"></p>
 
                 <form id="single-product-form" class="border p-3 max-w-75">
@@ -189,46 +189,23 @@
             </aside>
         </section>
 
-        <section id="single-product-details">
-            <form class="flex justify-start">
-                <button type="radio" name="detail_tabs" class="border pr-5 pl-5 m-0">Specifications</button>
-                <button type="radio" name="detail_tabs" class="border pr-5 pl-5 m-0">Reviews</button>
-            </form>
+        <section id="single-product-details" class="pt-6">
+              <button id="product-specification-button" class="mb-2 py-2 pr-5 pl-5 ml-2 text-2xl bg-blue-500 text-yellow-300 hover:bg-blue-600 font-bold m-0 rounded-lg">Specifications</button>
+              <button id="product-reviews-button" class="pr-5 py-2 pl-5 ml-2 text-2xl bg-blue-500 text-yellow-300 hover:bg-blue-600 font-bold m-0 rounded-lg">Reviews</button>
+
             <!--Specifications-->
             <div id="specifications" class="border">
-                <table class="table-auto">
-                    <thead>
-                      <tr>
-                          <th colspan="2" class="text-left p-2">Specifications</th>
-                      </tr>
-                    </thead>
+                <table class="table-auto w-full h-75">
                     <tbody>
                       <!--REPLACE with JS to add specifications-->
-                      <tr class="odd:bg-white even:bg-gray-200">
-                          <td class="pl-2 pr-10">Example-weight</td>
-                          <td class="pl-2">product.weight</td>
-                      </tr>
-                      <tr class="odd:bg-white even:bg-gray-200">
-                          <td class="pl-2 pr-10">Example-dimensions</td>
-                          <td class="pl-2">product.dimensions</td>
-                      </tr>
                     </tbody>    
                 </table>
             </div>
 
             <!--Reviews-->
-            <div id="single-product-reviews" class="border">
+            <div id="single-product-reviews" class="border hidden">
                 <ul id="products-reviews" class="h-75 overflow-y-auto">
                   <!--REPLACE with JS to add reviews-->
-                  <!-- 
-                  <div>
-                    <span class="text-yellow-500 pl-3"># of &#9733;</span>
-                    <span class="text-gray-500">2026-11-17</span>
-                    <p class="font-bold pl-3">Horror Skunx</p>
-                    <p class="pl-3">Very bad product it stole my brain</p>
-                    <hr>
-                  </div>
-                  -->
                 </ul>
             </div>
         </section>

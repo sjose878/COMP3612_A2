@@ -256,16 +256,10 @@ document.addEventListener("DOMContentLoaded", () => {
         // Maybe add a JSON file of product details as button data attribute?
         addToCartBtn.dataset.product = product.title;
         addToCartBtn.addEventListener("click", addToCart);
-        // reviews
 
-        /*                         <div>
-                          <span class="text-yellow-500 pl-3"># of &#9733;</span>
-                          <span class="text-gray-500">2026-11-17</span>
-                          <p class="font-bold pl-3">Horror Skunx</p>
-                          <p class="pl-3">Very bad product it stole my brain</p>
-                          <hr>
-                        </div> */
+        // reviews
         const reviews_ul = document.querySelector("#products-reviews");
+        reviews_ul.innerHTML = "";
 
         product.reviews.forEach(review => {
             const li = document.createElement("li");
@@ -291,11 +285,11 @@ document.addEventListener("DOMContentLoaded", () => {
             date.textContent = new Date(review.date);
 
             const name = document.createElement("p");
-            name.className = "font-bold pl-3 pb-2";
+            name.className = "font-bold pl-3 pb-2 text-lg";
             name.textContent = review.reviewerName;
 
             const email = document.createElement("span");
-            email.className = "font-normal italic pl-3";
+            email.className = "font-normal italic pl-3 text-base";
             email.textContent = "(" + review.reviewerEmail + ")";
 
             const comment = document.createElement("p");
@@ -319,6 +313,61 @@ document.addEventListener("DOMContentLoaded", () => {
         // get rid of extra hr
         reviews_ul.lastElementChild.remove();
 
-    }
+        // specification values: "weight", "dimensions" -> .width, .height, .depth, "warrantyInformation", "shippingInformation", "returnPolicy"
+        // specifications 
+
+        /*                       <tr class="odd:bg-white even:bg-gray-200">
+                          <td class="pl-2 pr-10">Example-weight</td>
+                          <td class="pl-2">product.weight</td>
+                      </tr>*/
+    
+
+        const specifications = [{title: "Weight", data: product.weight}, {title: "Dimensions", data: product.dimensions}, {title: "Warranty Information", data: product.warrantyInformation}, {title: "Shipping Information", data: product.shippingInformation}, {title: "Return Policy", data: product.returnPolicy}];
+        const tbody = document.querySelector("#specifications tbody");
+        tbody.innerHTML = "";
+        
+        specifications.forEach(item => {
+            const tr = document.createElement("tr");
+            tr.className = "odd:bg-white even:bg-gray-200";
+            const td_title = document.createElement("td");
+            td_title.className = "pl-3 pr-10 font-bold text-lg";
+            const td_data = document.createElement("td");
+            td_data.className = "pl-3 text-base";
+
+            td_title.textContent = item.title;
+
+            if (item.data == product.dimensions) {
+                td_data.textContent = `Width: ${item.data.width}, Height: ${item.data.height}, Depth: ${item.data.depth}`;
+            } else {
+                td_data.textContent = item.data;
+            };
+
+            tr.appendChild(td_title);
+            tr.appendChild(td_data);
+            tbody.appendChild(tr);
+        });
+
+        /* <button id="product-specification-button" type="radio" name="detail_tabs" class="border pr-5 pl-5 m-0">Specifications</button>
+                <button id="product-reviews-button" type="radio" name="detail_tabs" class="border pr-5 pl-5 m-0">Reviews</button>*/
+
+        document.querySelector("#product-specification-button").addEventListener("click", (e) => {
+            if (document.querySelector("#specifications").classList.contains("hidden")) {
+                document.querySelector("#specifications").classList.remove("hidden");
+                
+                document.querySelector("#single-product-reviews")
+                .classList.add("hidden");
+            };
+        });
+        document.querySelector("#product-reviews-button").addEventListener("click", (e) => {
+            if (document.querySelector("#single-product-reviews")
+                .classList.contains("hidden")) {
+                document.querySelector("#specifications").classList.add("hidden");
+                document.querySelector("#single-product-reviews")
+                .classList.remove("hidden");
+
+                
+            };
+        });
+    };
     
 });
