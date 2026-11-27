@@ -96,7 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
         this.price = price;
         this.sku = sku;
         this.quantity = 1; // Declaration of new CartItem implies having a CartItem
-        
         this.subtotal = () => this.price * this.quantity;
     }
 
@@ -117,22 +116,18 @@ document.addEventListener("DOMContentLoaded", () => {
         // Only add item to cart array if item isn't already cart. Otherwise increase quantity.
         let match = cart.find(c => c.sku === sku);
         if (match) {
-
+            match.quantity++;
         } else {
             //Create cart item object  
-            let cartItem = {
-            thumbnail: thumbnail,
-            title: title,
-            price: price,
-            quantity: 1
-            } 
+            const item = new CartItem(thumbnail, title, price, sku);
+            cart.push(item);
         }  
-
-        cart.push(cartItem);
-        // Add markup to list
+        // Update localStorage
+        updateCartStorage();
+        // Update display for cart view
         updateCartView();
         // Display toaster notification when button is clicked.
-        toasterHandler("#toast-add-to-cart", `${prod_title} added to cart`);
+        toasterHandler("#toast-add-to-cart", `${title} added to cart`);
     }
 
     /*
@@ -140,14 +135,39 @@ document.addEventListener("DOMContentLoaded", () => {
     Go through cart array to get product details.
     */
     function updateCartView() {
-        const tbody = document.querySelector("#cart-products tbody");
-        const tr = document.createElement("tr");
-        const cart_btn = document.createElement("button");
-        cart_btn.textContent = "Test";
+        for (let item of cart) {
+            const tbody = document.querySelector("#cart-products tbody");
+            const tr = document.createElement("tr");
 
-        tr.appendChild(cart_btn);
+            const td_btn = document.createElement("td");
+            const btn = document.createElement("button");
+            btn.textContent = "Remove";
+            btn.classList.add("text-blue-900", "font-bold", "hover:underline");
 
-        tbody.appendChild(tr);
+            const td_img = document.createElement("td");
+            const img = document.createElement("img");
+            img.src = item.thumbnail;
+            img.alt = item.title;
+            img.classList.add("max-h-20");
+
+            const td_title = document.createElement("td");
+            td_title.textContent = item.title;
+            const td_price = document.createElement("td");
+            td_price.textContent = item.price;
+            const td_quantity = document.createElement("td");
+            td_quantity.textContent = item.quantity;
+            const td_subtotal = document.createElement("td");
+            td_subtotal.textContent = item.subtotal;
+            td_btn.appendChild(btn);
+            tr.appendChild(td_btn);
+            td_img.appendChild(img);
+            tr.appendChild(td_img);
+            tr.appendChild(td_title);
+            tr.appendChild(td_price);
+            tr.appendChild(td_quantity);
+            tr.appendChild(td_subtotal);
+            tbody.appendChild(tr);
+        }
     }
 
     /*
