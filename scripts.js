@@ -1,11 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
-    //all data fetch
-    fetch("https://dummyjson.com/products?limit=100")
-    .then(data => data.json())
-    .then(data => {
+    // Attempt to fetch product data if it is already in localStorage
+    const data = JSON.parse(localStorage.getItem("data"));
+    if (data) {
+        // Put .then functions in a parent function?
         getCategories(data.products);
         addBrowseItems(data.products);
-    });
+    } else {
+    // Fetch data from API if not already in localStorage
+    fetch("https://dummyjson.com/products?limit=100")
+        .then(data => data.json())
+        .then(data => {
+            // Save product data to localStorage
+            localStorage.setItem("data", JSON.stringify(data));
+
+            getCategories(data.products);
+            addBrowseItems(data.products);
+        });
+    }
+    
 
     const pages = [{button: "home", view: "home"}, {button: "browser", view: "browser"}, {button: "cart", view: "cart"}, {button: "category", view: "category"}, {button: "logo", view: "home"}];
 
