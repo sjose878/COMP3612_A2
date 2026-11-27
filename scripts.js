@@ -79,7 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
     @param: message the message that will be displayed in the toaster
     */
     function toasterHandler(toaster, message) {
-        console.log("toaster handler msg:" + message);
         const t = document.querySelector(toaster);
         t.classList.remove("hidden")
         t.textContent = message;
@@ -143,6 +142,40 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
+    Event handler for removing a cart item.
+    Updates cart array and the updates display.
+    */
+    function removeCartItemHandler(e) {
+        console.log("removeCartItemHandler invocated");
+        const btn = e.target;
+        let sku = btn.dataset.sku;
+        console.log("sku:"+ sku);
+        let match = cart.find(c => c.sku === sku);
+        if (match) {
+            console.log("match found");
+            // If quantity = 1, remove the item from cart array.
+            if (match.quantity <= 1) {
+                let i = cart.findIndex(c => c.sku === sku);
+                console.log("cart index:" + i)
+                // safeguard to make sure splice only happens when item is found.
+                if (i != -1) {
+                    cart.splice(i, 1);
+                    console.log("cart spliced!")
+                }
+            } else {
+            // Other wise decrement quantity.
+                match.quantity--;
+            }
+        } else {
+            console.log("removeCartItemHandler: could not find item to remove");
+        }
+        // Update localStorage
+        //updateCartStorage
+        // Update display for cart view
+        updateCartView();
+    }
+
+    /*
     Update markup of list of products in cart.
     Go through cart array to get product details.
     */
@@ -162,7 +195,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const num_items_span = document.querySelector("#num-cart-items");
         let num_items = 0;
         for (let item of cart) {
-            console.log(item.quantity);
             num_items += item.quantity;
         }
         num_items_span.textContent = num_items;
@@ -177,6 +209,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const btn = document.createElement("button");
             btn.textContent = "Remove";
             btn.classList.add("text-blue-900", "font-bold", "cursor-pointer", "hover:underline");
+            btn.dataset.sku = item.sku;
+            btn.addEventListener("click", removeCartItemHandler);
 
             const td_img = document.createElement("td");
             const img = document.createElement("img");
