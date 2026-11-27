@@ -93,14 +93,26 @@ document.addEventListener("DOMContentLoaded", () => {
     */
     function addToCart(e) {
         const btn = e.target;
-        const prod_title = btn.dataset.product;
+        const prod_thumbnail = btn.dataset.thumbnail;
+        const prod_title = btn.dataset.title;
+        const prod_price = btn.dataset.price;
 
         //Get product data
 
-        // Add to cart array
-        
+        //Create cart item object
+        let cartItem = [];
+        /*
+        let cartItem = {
+            thumbnail:
+            title:
+            price:
+            quantity:
+        }
+            */
+        // Add cart item to cart array
+        // Only add if item is already in cart, otherwise increase quantity.
+        cart.push(cartItem);
         // Add markup to list
-
         updateCartView();
         // Display toaster notification when button is clicked.
         toasterHandler("#toast-add-to-cart", `${prod_title} added to cart`);
@@ -145,7 +157,20 @@ document.addEventListener("DOMContentLoaded", () => {
     */
     function removeCartStorage() {
         localStorage.removeItem('cart');
-    }    
+    }
+    
+    /*
+    Helper function for adding event handler: addToCart
+    Puts product thumbnail, title, and price as data attributes for a button.
+    Then addToCart event is assigned to button.
+    */
+    function setUpAddToCartHandler(btn, product) {
+        console.log("setUpAddToCartHandler ran")
+        btn.dataset.thumbnail = product.thumbnail;
+        btn.dataset.title = product.title;
+        btn.dataset.price = product.price;
+        btn.addEventListener("click", addToCart);
+    }
 
     /*
     PLACEHOLDER function for checkout toaster
@@ -252,8 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cart_button.className = "mt-auto bg-blue-700 text-white font-bold rounded-full w-full mt-2 mb-2 cursor-pointer hover:bg-blue-800";
             cart_button.textContent = "+ Add";
             // addToCart event is attached to button
-            cart_button.dataset.product = item.title;
-            cart_button.addEventListener("click", addToCart);
+            setUpAddToCartHandler(cart_button, item);
 
             product_button.addEventListener("click", () => {
                 addProductPage(item);
