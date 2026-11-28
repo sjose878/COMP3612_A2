@@ -92,12 +92,12 @@ document.addEventListener("DOMContentLoaded", () => {
     /*
     Constructor for Cart Item object. 
     */
-    function CartItem(thumbnail, title, price, sku) {
+    function CartItem(thumbnail, title, price, sku, quantity) {
         this.thumbnail = thumbnail;
         this.title = title;
         this.price = price;
         this.sku = sku;
-        this.quantity = 1; // Declaration of new CartItem implies having a CartItem
+        this.quantity = quantity;
         this.subtotal = () => {
             return this.price * this.quantity;
         };
@@ -110,27 +110,29 @@ document.addEventListener("DOMContentLoaded", () => {
     NEEDS ADDRESSING:
     -localStorage
     -updateCartView at the start?
-    -Remove button
     -Update Summary/Shipping
     -Adding multiple products at once
     */
     function addToCart(e) {
+        console.log("currentTarget:" + e.currentTarget);
         // Don't try submitting to server
         e.preventDefault();
         // Get product data
-        const btn = e.target;
+        const btn = e.target; // Either a button or form element
         let thumbnail = btn.dataset.thumbnail;
         let title = btn.dataset.title;
         let price = btn.dataset.price;
         let sku = btn.dataset.sku;
-
+        let num_items = Number(btn.dataset.num_items);
+        console.log(btn.dataset.num_items);
+        console.log(num_items + typeof(num_items));
         // Only add item to cart array if item isn't already cart. Otherwise increase quantity.
         let match = cart.find(c => c.sku === sku);
         if (match) {
-            match.quantity++;
+            match.quantity += num_items;
         } else {
             //Create cart item object  
-            const item = new CartItem(thumbnail, title, price, sku);
+            const item = new CartItem(thumbnail, title, price, sku, num_items);
             cart.push(item);
         }  
         // Update localStorage
@@ -146,10 +148,9 @@ document.addEventListener("DOMContentLoaded", () => {
     Updates cart array and the updates display.
     */
     function removeCartItemHandler(e) {
-        console.log("removeCartItemHandler invocated");
         const btn = e.target;
         let sku = btn.dataset.sku;
-        console.log("sku:"+ sku);
+        
         let match = cart.find(c => c.sku === sku);
         if (match) {
             console.log("match found");
@@ -160,7 +161,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 // safeguard to make sure splice only happens when item is found.
                 if (i != -1) {
                     cart.splice(i, 1);
-                    console.log("cart spliced!")
                 }
             } else {
             // Other wise decrement quantity.
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("removeCartItemHandler: could not find item to remove");
         }
         // Update localStorage
-        //updateCartStorage
+        //updateCartStorage();
         // Update display for cart view
         updateCartView();
     }
@@ -273,13 +273,36 @@ document.addEventListener("DOMContentLoaded", () => {
     Helper function for adding event handler: addToCart
     Puts product thumbnail, title, price, and sku as data attributes for a button.
     Then addToCart event is assigned to button.
+    @param: btn The button element that will recieve the event.
+    @param: product the details of a specific product.
+    @param: num_items   How many of the item is being added to cart.
     */
-    function setUpAddToCartHandler(btn, product) {
+    function setUpAddToCartHandler(btn, product, num_items) {
         btn.dataset.thumbnail = product.thumbnail;
         btn.dataset.title = product.title;
         btn.dataset.price = product.price;
         btn.dataset.sku = product.sku;
+        btn.dataset.num_items = num_items;
         btn.addEventListener("click", addToCart);
+    }
+
+    /*
+    Helper function for adding event handler: addToCart specifically for single-product view.
+    Handles when user adds cart item with quantity specified.
+    */
+    function setUpSingleProductCartHandler(product) {
+        console.log("setUpSingleProductCartHandler invoked");
+        const form = document.querySelector("#single-product-form");
+        const quantityInput = document.querySelector("#single-product-quantity");
+        form.dataset.thumbnail = product.thumbnail;
+        form.dataset.title = product.title;
+        form.dataset.price = product.price;
+        form.dataset.sku = product.sku;
+        form.addEventListener("submit", (e) => {
+            form.dataset.num_items = quantityInput.value;
+            console.log("input:" + quantityInput.value)
+            addToCart(e);
+        });
     }
 
     /*
@@ -287,9 +310,10 @@ document.addEventListener("DOMContentLoaded", () => {
     requirements: display toast, clear cart, return to home view
     */
     function checkout(e) {
+        // Don't try submitting to server
+        e.preventDefault();
         // Display toast notification
         toasterHandler("#toast-checkout", "Order placed!");
-
         // clear cart
         removeCartStorage();
         // TEMPORARY non-localStorage ver
@@ -307,7 +331,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const btn = document.querySelector("#checkout-btn");
         btn.addEventListener("click", checkout);
     }
-    setUpCheckoutHandler();
+    setUpCheckoutHandler(); // this function call is so lonely :(
 
     function addCategories(categories, thumbnails) {              
         const div = document.querySelector("#categories");
@@ -399,8 +423,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const cart_button = document.createElement("button");
             cart_button.className = "mt-auto bg-blue-700 text-white font-bold rounded-full w-full mt-2 mb-2 cursor-pointer hover:bg-blue-800";
             cart_button.textContent = "+ Add";
-            // addToCart event is attached to button
-            setUpAddToCartHandler(cart_button, item);
+            // addToCart event is attached to button. Don't have to worry about quantity.
+            setUpAddToCartHandler(cart_button, item, 1);
 
             product_button.addEventListener("click", () => {
                 addProductPage(item);
@@ -496,8 +520,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .textContent = product.description;
 
         // Add to cart button event handler
-        const addToCartBtn = document.querySelector("#single-product-form button");
-        setUpAddToCartHandler(addToCartBtn, product);
+        setUpSingleProductCartHandler(product);
 
         // reviews
         const reviews_ul = document.querySelector("#products-reviews");
