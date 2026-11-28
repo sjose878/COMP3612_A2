@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     cart.splice(i, 1);
                 }
             } else {
-            // Other wise decrement quantity.
+            // Otherwise decrement quantity.
                 match.quantity--;
             }
         } else {
@@ -177,23 +177,9 @@ document.addEventListener("DOMContentLoaded", () => {
     */
     function updateCartView() {
         // Either show the cart or a message saying there is no items or cart.
-        const empty_cart_msg = document.querySelector("#empty-cart");
-        const shopping_cart = document.querySelector("#cart");
-        if (cart.length == 0) {
-            empty_cart_msg.classList.remove("hidden");
-            shopping_cart.classList.add("hidden");
-        } else {
-            empty_cart_msg.classList.add("hidden");
-            shopping_cart.classList.remove("hidden");
-        }
-
+        displayCart();
         // Update header cart number
-        const num_items_span = document.querySelector("#num-cart-items");
-        let num_items = 0;
-        for (let item of cart) {
-            num_items += item.quantity;
-        }
-        num_items_span.textContent = num_items;
+        updateHeaderCartNum();
 
         // Add markup for cart list
         const tbody = document.querySelector("#cart-products tbody");
@@ -234,6 +220,28 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         // Update checkout summary
         updateSummary();
+
+        // Display cart if there is at least 1 item in cart. Otherwise display no items message.
+        function displayCart() {
+            const empty_cart_msg = document.querySelector("#empty-cart");
+            const shopping_cart = document.querySelector("#cart");
+            if (cart.length == 0) {
+                empty_cart_msg.classList.remove("hidden");
+                shopping_cart.classList.add("hidden");
+            } else {
+                empty_cart_msg.classList.add("hidden");
+                shopping_cart.classList.remove("hidden");
+            }
+        }
+        // Update number that displays number of cart items in header.
+        function updateHeaderCartNum() {
+            const num_items_span = document.querySelector("#num-cart-items");
+            let num_items = 0;
+            cart.forEach(c => {
+                num_items += c.quantity
+            })
+            num_items_span.textContent = num_items;
+        }
     }
 
     /*
@@ -353,19 +361,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             ]
         }
-        // select inputs
+        // Select inputs
         const select_shipping = document.querySelector("#cart-shipping-choice");
         const select_destination = document.querySelector("#cart-destination-choice");
-
         let shipping = select_shipping.value;
         let destination = select_destination.value;
-        console.log("destination:" + destination);
 
         let merchandisePrice = calculateMerchandise();
         // Shipping is free if merchandise price > $500
         let shippingPrice = 0;
         if (merchandisePrice <= FREE_SHIPPING_THRESHOLD) {
-            console.log("shipping price applied");
+            console.log("Shipping price applied");
             let match = shippingInfo.destinations.find(d => d.destination == destination);
             shippingPrice += match.shippingPrices[shipping.toLowerCase()];
         } else {
@@ -381,8 +387,6 @@ document.addEventListener("DOMContentLoaded", () => {
         totalPrice += merchandisePrice;
         totalPrice += shippingPrice;
         totalPrice += taxPrice;
-
-        console.log("merchPrice:" + merchandisePrice);
         
         // Update markup for cart summary
         const td_merchandise = document.querySelector("#cart-merch-price");
@@ -404,9 +408,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return total;
         }
     }
+
     /*
-    PLACEHOLDER function for checkout toaster
-    requirements: display toast, clear cart, return to home view
+    "Places" order for cart. Removes all cart items, displays a toast notification, then returns user to home view.
     */
     function checkout(e) {
         // Don't try submitting to server
@@ -419,7 +423,6 @@ document.addEventListener("DOMContentLoaded", () => {
         while (cart.length > 0) {
             cart.pop();
         }
-
         updateCartView();
         // Return to home view
         // ADDRESS ME
