@@ -527,40 +527,43 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function addProductSpecifications(product, dimensions) {
-            const tr = document.createElement("tr");
-            tr.className = "odd:bg-white even:bg-gray-200";
+        const tr = document.createElement("tr");
+        tr.className = "odd:bg-white even:bg-gray-200";
 
-            const td_title = document.createElement("td");
-            td_title.className = "pl-3 pr-10 font-bold text-lg";   
-            td_title.textContent = product.title;
+        const td_title = document.createElement("td");
+        td_title.className = "pl-3 pr-10 font-bold text-lg";   
+        td_title.textContent = product.title;
 
-            const td_data = document.createElement("td");
-            td_data.className = "pl-3 text-base";
+        const td_data = document.createElement("td");
+        td_data.className = "pl-3 text-base";
 
-            if (product.data == dimensions) {
-                td_data.textContent = `Width: ${product.data.width}, Height: ${product.data.height}, Depth: ${product.data.depth}`;
-            } else {
-                td_data.textContent = product.data;
-            };
+        if (product.data == dimensions) {
+            td_data.textContent = `Width: ${product.data.width}, Height: ${product.data.height}, Depth: ${product.data.depth}`;
+        } else {
+            td_data.textContent = product.data;
+        };
 
-            tr.appendChild(td_title);
-            tr.appendChild(td_data);
+        tr.appendChild(td_title);
+        tr.appendChild(td_data);
 
-            return tr;
+        return tr;
     }
 
     function switchProductTab() {
-        const specifications = document.querySelector("#product-specification-button");
+        const specifications_button = document.querySelector("#product-specification-button");
+        const reviews_button = document.querySelector("#product-reviews-button");
+
+        const specifications = document.querySelector("#specifications");
         const reviews = document.querySelector("#single-product-reviews");
 
-        specifications.addEventListener("click", () => {
+        specifications_button.addEventListener("click", () => {
             if (specifications.classList.contains("hidden")) {
                 specifications.classList.remove("hidden"); 
                 reviews.classList.add("hidden");
             };
         });
 
-        reviews.addEventListener("click", () => {
+        reviews_button.addEventListener("click", () => {
             if (reviews.classList.contains("hidden")) {
                 specifications.classList.add("hidden");
                 reviews.classList.remove("hidden");             
@@ -661,7 +664,6 @@ document.addEventListener("DOMContentLoaded", () => {
         // https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
         while(featured_products.size < 5) {
             let i = Math.floor(Math.random() * products.length);
-            console.log(i);
             featured_products.add(products[i]); 
         };
 
