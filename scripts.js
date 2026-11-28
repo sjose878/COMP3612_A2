@@ -111,10 +111,8 @@ document.addEventListener("DOMContentLoaded", () => {
     -localStorage
     -updateCartView at the start?
     -Update Summary/Shipping
-    -Adding multiple products at once
     */
     function addToCart(e) {
-        console.log("currentTarget:" + e.currentTarget);
         // Don't try submitting to server
         e.preventDefault();
         // Get product data
@@ -124,8 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let price = target.dataset.price;
         let sku = target.dataset.sku;
         let num_items = Number(target.dataset.num_items);
-        //console.log(target.dataset.num_items);
-        //console.log(num_items + typeof(num_items));
+      
         // Only add item to cart array if item isn't already cart. Otherwise increase quantity.
         let match = cart.find(c => c.sku === sku);
         if (match) {
@@ -176,8 +173,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-    Update markup of list of products in cart.
-    Go through cart array to get product details.
+    Updates cart view display with to show items currently in cart..
+    Goes through cart array to get product details and makes markup for each item.
     */
     function updateCartView() {
         // Either show the cart or a message saying there is no items or cart.
@@ -270,9 +267,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     /*
-    Helper function for adding event handler: addToCart
+    Helper function for adding event handler: addToCart to a button.
     Puts product thumbnail, title, price, and sku as data attributes for a button.
     Then addToCart event is assigned to button.
+
     @param: btn The button element that will recieve the event.
     @param: product the details of a specific product.
     @param: num_items   How many of the item is being added to cart.
@@ -287,30 +285,34 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-    Attaches event listener to add to cart button in single product view.
+    Attaches event listener to the add to cart button in single product view.
     Handles when adding an item with specified quanitity.
+    addToCart event is assigned to form in single product view.
+
+    @param: product the details of a specific product.
     */
     function setUpSingleProductCartHandler(product) {
         const form = document.querySelector("#single-product-form");
-        // Remove old event listener from previous times single product view is visited.
+        // Remove old event listener if single product view was visited before.
         form.removeEventListener("submit", singleProductFormSubmit);
 
         form.dataset.thumbnail = product.thumbnail;
         form.dataset.title = product.title;
         form.dataset.price = product.price;
         form.dataset.sku = product.sku;
+        // Add new event listener for single product currently being viewed.
         form.addEventListener("submit", singleProductFormSubmit);
-
     }
 
     /*
     Retrieves user input on the quantity of items they would like to add to cart.
     Adds specified quantity of product to cart. 
+
+    @param: e   the form element in single product view.
     */
     function singleProductFormSubmit(e) {
             const form = e.currentTarget;
             const quantityInput = document.querySelector("#single-product-quantity");
-
             form.dataset.num_items = quantityInput.value;
             addToCart(e)
         }    
