@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Put .then functions in a parent function?
         getCategories(data.products);
         addBrowseItems(data.products);
+        addFeaturedProducts(data.products);
     } else {
     // Fetch data from API if not already in localStorage
     fetch("https://dummyjson.com/products?limit=100")
@@ -15,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             getCategories(data.products);
             addBrowseItems(data.products);
+            addFeaturedProducts(data.products);
         });
     }
     
@@ -649,5 +651,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
     
     };
+
+    // home featured products
+    function addFeaturedProducts(products) {
+        
+        const featured_products = new Set();
+         
+        // https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
+        while(featured_products.size < 5) {
+            let i = Math.floor(Math.random() * products.length);
+            console.log(i);
+            featured_products.add(products[i]); 
+        };
+
+        const ul = document.querySelector("#featured-products");
+        ul.innerHTML = "";
+
+        featured_products.forEach(item => {
+            const li = document.createElement("li");
+            li.className = "bg-white m-2 p-1 rounded-md flex flex-col";
+            
+            const product_button = document.createElement("button");
+            product_button.className = "flex flex-col flex-1 text-left p-2 cursor-pointer";
+
+            const img = document.createElement("img");
+            img.src = item.thumbnail;
+            
+            const title = document.createElement("p");
+            title.textContent = item.title;
+            title.className = "cursor-pointer hover:underline hover:text-yellow-300";
+            
+            const price = document.createElement("p");
+            price.className = "font-bold mt-auto";
+            price.textContent = "$" + item.price;
+
+            const cart_button = document.createElement("button");
+            cart_button.className = "mt-auto bg-blue-700 text-white font-bold rounded-full w-full mt-2 mb-2 cursor-pointer hover:bg-blue-800";
+            cart_button.textContent = "+ Add";
+            // addToCart event is attached to button. Don't have to worry about quantity.
+            setUpAddToCartHandler(cart_button, item, 1);
+
+            product_button.addEventListener("click", () => {
+                addProductPage(item);
+                pages.forEach(item => document.querySelector(`#view-${item.view}`).classList.add("hidden"));
+                document.querySelector("#view-single-product").classList.remove("hidden");
+            });
+
+            product_button.appendChild(img);
+            product_button.appendChild(title);
+            product_button.appendChild(price);
+            li.appendChild(product_button);
+            li.appendChild(cart_button);
+            ul.appendChild(li);
+        });
+    }
     
 });
