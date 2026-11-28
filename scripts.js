@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (data) {
         // Put .then functions in a parent function?
         getCategories(data.products);
-        addBrowseItems(data.products);
+        addBrowseProducts(data.products);
         addFeaturedProducts(data.products);
     } else {
     // Fetch data from API if not already in localStorage
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem("data", JSON.stringify(data));
 
             getCategories(data.products);
-            addBrowseItems(data.products);
+            addBrowseProducts(data.products);
             addFeaturedProducts(data.products);
         });
     }
@@ -347,39 +347,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     setUpCheckoutHandler(); // this function call is so lonely :(
 
-    function addCategories(categories, thumbnails) {              
-        const div = document.querySelector("#categories");
-        let i = 0;
-
-        categories.forEach(item => {
-            const card = document.createElement("button");
-            card.className = "snap-start w-64 px-8 py-5 flex flex-col justify-center text-center items-center hover:drop-shadow-lg/40";
-
-            const img = document.createElement("img");
-            img.src = thumbnails[i];
-            img.className = "rounded-2xl w-48 h-48 object-cover max-w-max";
-            
-            const p = document.createElement("p");
-            p.textContent = item.charAt(0).toUpperCase() + item.replace("-", " ").slice(1); // https://www.w3schools.com/jsref/jsref_replace.asp, https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript 
-            p.className = "cursor-pointer hover:underline hover:text-yellow-300";
-
-            card.addEventListener("click", () => {
-                alert(`you clicked ${p.textContent}`)
-                // replace with category filter later
-            });
-            
-            card.appendChild(img);
-            card.appendChild(p);
-            div.appendChild(card);
-            i++;
-        });
-
+    function scrollCategories(div) {
         // https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollBy 
-        // maybe put in own function
-
         document.querySelector("#categories-left")
         .addEventListener("click", () => {
-        div.scrollBy({
+            div.scrollBy({
                 left: -280 * 2,
                 behavior: "smooth"
             });
@@ -392,7 +364,36 @@ document.addEventListener("DOMContentLoaded", () => {
                 behavior: "smooth"
             });
         });
-        //card.classList.add("");
+    }
+
+    function addCategories(categories, thumbnails) {              
+        const div = document.querySelector("#categories");
+        let i = 0;
+
+        categories.forEach(category => {
+            const card = document.createElement("button");
+            card.className = "snap-start w-64 px-8 py-5 flex flex-col justify-center text-center items-center hover:drop-shadow-lg/40";
+
+            const img = document.createElement("img");
+            img.src = thumbnails[i];
+            img.className = "rounded-2xl w-48 h-48 object-cover max-w-max";
+            
+            const p = document.createElement("p");
+            p.textContent = category.charAt(0).toUpperCase() + category.replace("-", " ").slice(1); // https://www.w3schools.com/jsref/jsref_replace.asp, https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript 
+            p.className = "cursor-pointer hover:underline hover:text-yellow-300";
+
+            card.addEventListener("click", () => {
+                alert(`you clicked ${p.textContent}`);
+                // replace with category filter later
+            });
+            
+            card.appendChild(img);
+            card.appendChild(p);
+            div.appendChild(card);
+            i++;
+        });
+
+        scrollCategories(div);
     }
 
     function getCategories(products) {
@@ -412,88 +413,181 @@ document.addEventListener("DOMContentLoaded", () => {
         addCategories(categories, thumbnails); 
     }
 
-    // clean up and split into smaller functions later
-    function addBrowseItems(products) {
+    // creates product card for browse or featured products
+    function addProductCard(product) {
+        const li = document.createElement("li");
+        li.className = "bg-white m-2 p-1 rounded-md flex flex-col";
+            
+        const product_button = document.createElement("button");
+        product_button.className = "flex flex-col flex-1 text-left p-2 cursor-pointer";
+
+        const img = document.createElement("img");
+        img.src = product.thumbnail;
+            
+        const title = document.createElement("p");
+        title.textContent = product.title;
+        title.className = "cursor-pointer hover:underline hover:text-yellow-300";
+            
+        const price = document.createElement("p");
+        price.className = "font-bold mt-auto";
+        price.textContent = "$" + product.price;
+
+        const cart_button = document.createElement("button");
+        cart_button.className = "mt-auto bg-blue-700 text-white font-bold rounded-full w-full mt-2 mb-2 cursor-pointer hover:bg-blue-800";
+        cart_button.textContent = "+ Add";
+        // addToCart event is attached to button. Don't have to worry about quantity.
+        setUpAddToCartHandler(cart_button, product, 1);
+
+
+
+        // CREATE SINGLE HANDLER FOR STUFF LIKE THIS????????????????????????????????
+        product_button.addEventListener("click", () => {
+            addProductPage(product);
+            pages.forEach(product => document.querySelector(`#view-${product.view}`).classList.add("hidden"));
+            document.querySelector("#view-single-product").classList.remove("hidden");
+        });
+
+
+
+
+        product_button.appendChild(img);
+        product_button.appendChild(title);
+        product_button.appendChild(price);
+        li.appendChild(product_button);
+        li.appendChild(cart_button);
+
+        return li;
+    }
+
+    function addBrowseProducts(products) {
         const ul = document.querySelector("#browse-products-list");
 
-        products.forEach(item => {
-            const li = document.createElement("li");
-            li.className = "bg-white m-2 p-1 rounded-md flex flex-col";
-            
-            const product_button = document.createElement("button");
-            product_button.className = "flex flex-col flex-1 text-left p-2 cursor-pointer";
-
-            const img = document.createElement("img");
-            img.src = item.thumbnail;
-            
-            const title = document.createElement("p");
-            title.textContent = item.title;
-            title.className = "cursor-pointer hover:underline hover:text-yellow-300";
-            
-            const price = document.createElement("p");
-            price.className = "font-bold mt-auto";
-            price.textContent = "$" + item.price;
-
-            const cart_button = document.createElement("button");
-            cart_button.className = "mt-auto bg-blue-700 text-white font-bold rounded-full w-full mt-2 mb-2 cursor-pointer hover:bg-blue-800";
-            cart_button.textContent = "+ Add";
-            // addToCart event is attached to button. Don't have to worry about quantity.
-            setUpAddToCartHandler(cart_button, item, 1);
-
-            product_button.addEventListener("click", () => {
-                addProductPage(item);
-                pages.forEach(item => document.querySelector(`#view-${item.view}`).classList.add("hidden"));
-                document.querySelector("#view-single-product").classList.remove("hidden");
-            });
-
-            product_button.appendChild(img);
-            product_button.appendChild(title);
-            product_button.appendChild(price);
-            li.appendChild(product_button);
-            li.appendChild(cart_button);
-            ul.appendChild(li);
+        products.forEach(product => {
+            ul.appendChild(addProductCard(product));
         });
     }
 
+    function scrollProductImgs(product, i) {
+        document.querySelector("#single-product-left").addEventListener("click", () => {
+            i -= 1;
+            if (i < 0) {
+                i = product.images.length - 1;
+            };
+
+            document.querySelector("#single-product-img")
+            .src = product.images[i];
+        });
+
+        document.querySelector("#single-product-right").addEventListener("click", () => {
+            i += 1;
+            if (i >= product.images.length) {
+                i = 0;
+            };
+
+            document.querySelector("#single-product-img")
+            .src = product.images[i];
+        });
+    }
+
+    function addProductReviews(review) {
+        const li = document.createElement("li");
+
+        const rating = document.createElement("span");
+        rating.className = "inline-block text-yellow-500 pl-3 pt-2 text-2xl";
+
+        const rating_num = Math.round(review.rating);   
+        let stars = "★".repeat(rating_num);
+        stars += "☆".repeat(5 - rating_num);
+
+        rating.textContent = stars;
+
+        const date = document.createElement("span");
+        date.className = "text-gray-500 pl-2";
+        date.textContent = new Date(review.date);
+
+        const name = document.createElement("p");
+        name.className = "font-bold pl-3 pb-2 text-lg";
+        name.textContent = review.reviewerName;
+
+        const email = document.createElement("span");
+        email.className = "font-normal italic pl-3 text-base";
+        email.textContent = "(" + review.reviewerEmail + ")";
+
+        const comment = document.createElement("p");
+        comment.className = "pl-3 pb-5";
+        comment.textContent = review.comment;
+
+        li.appendChild(rating);
+        li.appendChild(date);
+        name.append(email);
+        li.appendChild(name);
+        li.appendChild(comment);
+
+        return li;
+    }
+
+    function addProductSpecifications(product, dimensions) {
+            const tr = document.createElement("tr");
+            tr.className = "odd:bg-white even:bg-gray-200";
+
+            const td_title = document.createElement("td");
+            td_title.className = "pl-3 pr-10 font-bold text-lg";   
+            td_title.textContent = product.title;
+
+            const td_data = document.createElement("td");
+            td_data.className = "pl-3 text-base";
+
+            if (product.data == dimensions) {
+                td_data.textContent = `Width: ${product.data.width}, Height: ${product.data.height}, Depth: ${product.data.depth}`;
+            } else {
+                td_data.textContent = product.data;
+            };
+
+            tr.appendChild(td_title);
+            tr.appendChild(td_data);
+
+            return tr;
+    }
+
+    function switchProductTab() {
+        const specifications = document.querySelector("#product-specification-button");
+        const reviews = document.querySelector("#single-product-reviews");
+
+        specifications.addEventListener("click", () => {
+            if (specifications.classList.contains("hidden")) {
+                specifications.classList.remove("hidden"); 
+                reviews.classList.add("hidden");
+            };
+        });
+
+        reviews.addEventListener("click", () => {
+            if (reviews.classList.contains("hidden")) {
+                specifications.classList.add("hidden");
+                reviews.classList.remove("hidden");             
+            };
+        });
+    }
+
+    //prob gonna split into more functions later.
     function addProductPage(product) {
+        //breadcrumb nav
         document.querySelector("#nav-single-product-category")
-        .textContent = product.category.charAt(0).toUpperCase() + product.category.replace("-", " ").slice(1);;
+        .textContent = product.category.charAt(0).toUpperCase() + product.category.replace("-", " ").slice(1);
         
         document.querySelector("#nav-single-product-title")
         .textContent = product.title;
 
-        let img_i = 0; 
+        //images
         document.querySelector("#single-product-img")
-        .src = product.images[img_i];
+        .src = product.images[0];
 
-         /* <button id="single-product-left" class="-mt-25 text-8xl font-extrabold text-yellow-300 hover:text-yellow-500">←</button>
-                <button id="single-product-right" class="-mt-25 text-8xl font-extrabold text-yellow-300 hover:text-yellow-500">→</button> */
-
-        document.querySelector("#single-product-left").addEventListener("click", () => {
-            img_i -= 1;
-            if (img_i < 0) {
-                img_i = product.images.length - 1;
-            };
-
-            document.querySelector("#single-product-img")
-            .src = product.images[img_i];
-        });
-
-        document.querySelector("#single-product-right").addEventListener("click", () => {
-            img_i += 1;
-            if (img_i >= product.images.length) {
-                img_i = 0;
-            };
-
-            document.querySelector("#single-product-img")
-            .src = product.images[img_i];
-        });
+        scrollProductImgs(product, 0);        
 
         const img_dots = document.querySelector("#img_num");
         img_dots.textContent = "•".repeat(product.images.length);
         img_dots.className = "text-gray-500 -mt-8 text-5xl"
 
-
+        //product details
         document.querySelector("#single-product-title")
         .textContent = product.title;
 
@@ -503,20 +597,15 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("#single-product-sku")
         .textContent = product.sku;
 
+        //rating
         const rating_num = Math.round(product.rating);   
-        let stars = "";
-
-        for (let i = 1; i <= 5; i++) {
-            if (i <= rating_num) {
-                stars += "★";
-            } else {
-                stars += "☆";
-            }
-        }
+        let stars = "★".repeat(rating_num);
+        stars += "☆".repeat(5 - rating_num);
 
         document.querySelector("#single-product-rating")
         .textContent = stars;
 
+        //tags
         const tags_div = document.querySelector("#single-product-tags");
         tags_div.innerHTML = "";
 
@@ -541,52 +630,11 @@ document.addEventListener("DOMContentLoaded", () => {
         reviews_ul.innerHTML = "";
 
         product.reviews.forEach(review => {
-            const li = document.createElement("li");
-
-            const rating = document.createElement("span");
-            rating.className = "inline-block text-yellow-500 pl-3 pt-2 text-2xl";
-
-            const review_rating_num = Math.round(review.rating);   
-            let stars = "";
-
-            for (let i = 1; i <= 5; i++) {
-                if (i <= review_rating_num) {
-                    stars += "★";
-                } else {
-                    stars += "☆";
-                }
-            }
-
-            rating.textContent = stars;
-
-            const date = document.createElement("span");
-            date.className = "text-gray-500 pl-2";
-            date.textContent = new Date(review.date);
-
-            const name = document.createElement("p");
-            name.className = "font-bold pl-3 pb-2 text-lg";
-            name.textContent = review.reviewerName;
-
-            const email = document.createElement("span");
-            email.className = "font-normal italic pl-3 text-base";
-            email.textContent = "(" + review.reviewerEmail + ")";
-
-            const comment = document.createElement("p");
-            comment.className = "pl-3 pb-5";
-            comment.textContent = review.comment;
-
             const hr = document.createElement("hr");
             hr.className = "ml-3 mr-3"
 
-            li.appendChild(rating);
-            li.appendChild(date);
-            name.append(email);
-            li.appendChild(name);
-            //li.appendChild(email);
-            li.appendChild(comment);
-            reviews_ul.appendChild(li);
+            reviews_ul.appendChild(addProductReviews(review));
             reviews_ul.appendChild(hr);
-
         });
 
         // get rid of extra hr
@@ -594,67 +642,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.querySelector("#single-product-quantity").value = 1; //reset quantity num
 
-        // specification values: "weight", "dimensions" -> .width, .height, .depth, "warrantyInformation", "shippingInformation", "returnPolicy"
-        // specifications 
-
-        /*                       <tr class="odd:bg-white even:bg-gray-200">
-                          <td class="pl-2 pr-10">Example-weight</td>
-                          <td class="pl-2">product.weight</td>
-                      </tr>*/
-    
-
+        //specifications 
         const specifications = [{title: "Weight", data: product.weight}, {title: "Dimensions", data: product.dimensions}, {title: "Warranty Information", data: product.warrantyInformation}, {title: "Shipping Information", data: product.shippingInformation}, {title: "Return Policy", data: product.returnPolicy}];
         const tbody = document.querySelector("#specifications tbody");
         tbody.innerHTML = "";
         
         specifications.forEach(item => {
-            const tr = document.createElement("tr");
-            tr.className = "odd:bg-white even:bg-gray-200";
-            const td_title = document.createElement("td");
-            td_title.className = "pl-3 pr-10 font-bold text-lg";
-            const td_data = document.createElement("td");
-            td_data.className = "pl-3 text-base";
-
-            td_title.textContent = item.title;
-
-            if (item.data == product.dimensions) {
-                td_data.textContent = `Width: ${item.data.width}, Height: ${item.data.height}, Depth: ${item.data.depth}`;
-            } else {
-                td_data.textContent = item.data;
-            };
-
-            tr.appendChild(td_title);
-            tr.appendChild(td_data);
-            tbody.appendChild(tr);
+            tbody.appendChild(addProductSpecifications(item, product.dimensions));
         });
 
-        /* <button id="product-specification-button" type="radio" name="detail_tabs" class="border pr-5 pl-5 m-0">Specifications</button>
-                <button id="product-reviews-button" type="radio" name="detail_tabs" class="border pr-5 pl-5 m-0">Reviews</button>*/
-
-        document.querySelector("#product-specification-button").addEventListener("click", (e) => {
-            if (document.querySelector("#specifications").classList.contains("hidden")) {
-                document.querySelector("#specifications").classList.remove("hidden");
-                
-                document.querySelector("#single-product-reviews")
-                .classList.add("hidden");
-            };
-        });
-        document.querySelector("#product-reviews-button").addEventListener("click", (e) => {
-            if (document.querySelector("#single-product-reviews")
-                .classList.contains("hidden")) {
-                document.querySelector("#specifications").classList.add("hidden");
-                document.querySelector("#single-product-reviews")
-                .classList.remove("hidden");
-                
-            };
-        });
-
-    
+        switchProductTab();    
     };
 
     // home featured products
-    function addFeaturedProducts(products) {
-        
+    function addFeaturedProducts(products) {    
         const featured_products = new Set();
 
         // https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
@@ -667,46 +668,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const ul = document.querySelector("#featured-products");
         ul.innerHTML = "";
 
-        featured_products.forEach(item => {
-            const li = document.createElement("li");
-            li.className = "bg-white m-2 p-1 rounded-md flex flex-col";
-            
-            const product_button = document.createElement("button");
-            product_button.className = "flex flex-col flex-1 text-left p-2 cursor-pointer";
-
-            const img = document.createElement("img");
-            img.src = item.thumbnail;
-            
-            const title = document.createElement("p");
-            title.textContent = item.title;
-            title.className = "cursor-pointer hover:underline hover:text-yellow-300";
-            
-            const price = document.createElement("p");
-            price.className = "font-bold mt-auto";
-            price.textContent = "$" + item.price;
-
-            const cart_button = document.createElement("button");
-            cart_button.className = "mt-auto bg-blue-700 text-white font-bold rounded-full w-full mt-2 mb-2 cursor-pointer hover:bg-blue-800";
-            cart_button.textContent = "+ Add";
-            // addToCart event is attached to button. Don't have to worry about quantity.
-            setUpAddToCartHandler(cart_button, item, 1);
-
-            product_button.addEventListener("click", () => {
-                addProductPage(item);
-                pages.forEach(item => document.querySelector(`#view-${item.view}`).classList.add("hidden"));
-                document.querySelector("#view-single-product").classList.remove("hidden");
-            });
-
-            product_button.appendChild(img);
-            product_button.appendChild(title);
-            product_button.appendChild(price);
-            li.appendChild(product_button);
-            li.appendChild(cart_button);
-            ul.appendChild(li);
+        featured_products.forEach(product => {
+            ul.appendChild(addProductCard(product));
         });
-    }
+    };
 
-    // home header shop button 
+    // home header shop button. look into making helper function for this so dont have to repeat the hidden crap so much
     document.querySelector("#home-shop-button")
     .addEventListener("click", () => {
         pages.forEach(item => document.querySelector(`#view-${item.view}`).classList.add("hidden"));
