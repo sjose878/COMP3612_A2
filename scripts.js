@@ -118,14 +118,14 @@ document.addEventListener("DOMContentLoaded", () => {
         // Don't try submitting to server
         e.preventDefault();
         // Get product data
-        const btn = e.target; // Either a button or form element
-        let thumbnail = btn.dataset.thumbnail;
-        let title = btn.dataset.title;
-        let price = btn.dataset.price;
-        let sku = btn.dataset.sku;
-        let num_items = Number(btn.dataset.num_items);
-        console.log(btn.dataset.num_items);
-        console.log(num_items + typeof(num_items));
+        const target = e.target; // Either a button or form element
+        let thumbnail = target.dataset.thumbnail;
+        let title = target.dataset.title;
+        let price = target.dataset.price;
+        let sku = target.dataset.sku;
+        let num_items = Number(target.dataset.num_items);
+        //console.log(target.dataset.num_items);
+        //console.log(num_items + typeof(num_items));
         // Only add item to cart array if item isn't already cart. Otherwise increase quantity.
         let match = cart.find(c => c.sku === sku);
         if (match) {
@@ -287,23 +287,33 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-    Helper function for adding event handler: addToCart specifically for single-product view.
-    Handles when user adds cart item with quantity specified.
+    Attaches event listener to add to cart button in single product view.
+    Handles when adding an item with specified quanitity.
     */
     function setUpSingleProductCartHandler(product) {
-        console.log("setUpSingleProductCartHandler invoked");
         const form = document.querySelector("#single-product-form");
-        const quantityInput = document.querySelector("#single-product-quantity");
+        // Remove old event listener from previous times single product view is visited.
+        form.removeEventListener("submit", singleProductFormSubmit);
+
         form.dataset.thumbnail = product.thumbnail;
         form.dataset.title = product.title;
         form.dataset.price = product.price;
         form.dataset.sku = product.sku;
-        form.addEventListener("submit", (e) => {
-            form.dataset.num_items = quantityInput.value;
-            console.log("input:" + quantityInput.value)
-            addToCart(e);
-        });
+        form.addEventListener("submit", singleProductFormSubmit);
+
     }
+
+    /*
+    Retrieves user input on the quantity of items they would like to add to cart.
+    Adds specified quantity of product to cart. 
+    */
+    function singleProductFormSubmit(e) {
+            const form = e.currentTarget;
+            const quantityInput = document.querySelector("#single-product-quantity");
+
+            form.dataset.num_items = quantityInput.value;
+            addToCart(e)
+        }    
 
     /*
     PLACEHOLDER function for checkout toaster
