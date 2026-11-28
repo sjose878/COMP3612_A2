@@ -233,6 +233,8 @@ document.addEventListener("DOMContentLoaded", () => {
             tr.appendChild(td_subtotal);
             tbody.appendChild(tr);
         }
+        // Update checkout summary
+        updateSummary();
     }
 
     /*
@@ -316,7 +318,90 @@ document.addEventListener("DOMContentLoaded", () => {
             form.dataset.num_items = quantityInput.value;
             addToCart(e)
         }    
+    
+    function updateSummary() {
+        const TAX_RATE = 0.05;
+        const FREE_SHIPPING_THRESHOLD = 500;
 
+        const shippingInfo = {
+            destinations: [
+                {
+                    destination: "Canada",
+                    shippingPrices: {
+                        standard: 10,
+                        express: 25,
+                        priority: 35
+                    }
+                },
+                {
+                    destination: "United States",
+                    shippingPrices: {
+                        standard: 15,
+                        express: 25,
+                        priority: 50
+                    }
+                },
+                {
+                    destination: "International",
+                    shippingPrices: {
+                        standard: 20,
+                        express: 30,
+                        priority: 50
+                    }
+                }
+            ]
+        }
+        // select inputs
+        const select_shipping = document.querySelector("#cart-shipping-choice");
+        const select_destination = document.querySelector("#cart-destination-choice");
+
+        let shipping = select_shipping.value;
+        let destination = select_destination.value;
+        console.log("destination:" + destination);
+
+        let merchandisePrice = calculateMerchandise();
+        // Shipping is free if merchandise price > $500
+        let shippingPrice = 0;
+        if (merchandisePrice <= FREE_SHIPPING_THRESHOLD) {
+            console.log("shipping price applied");
+            let match = shippingInfo.destinations.find(d => d.destination == destination);
+            shippingPrice += match.shippingPrices[shipping.toLowerCase()];
+        } else {
+            console.log("Shipping is free!");
+        }
+        // Apply tax only if destination is Canada
+        let taxPrice = 0;
+        if (destination === "Canada") {
+            taxPrice = merchandisePrice * TAX_RATE;
+            console.log("Canada selected, applying 5% tax");
+        }
+        let totalPrice = 0;
+        totalPrice += merchandisePrice;
+        totalPrice += shippingPrice;
+        totalPrice += taxPrice;
+
+        console.log("merchPrice:" + merchandisePrice);
+        
+        // Update markup for cart summary
+        const td_merchandise = document.querySelector("#cart-merch-price");
+        const td_shipping = document.querySelector("#cart-ship-price");
+        const td_tax = document.querySelector("#cart-tax-price");
+        const td_total = document.querySelector("#cart-total-price");
+        td_merchandise.textContent = `$${merchandisePrice.toFixed(2)}`;
+        td_shipping.textContent = `$${shippingPrice.toFixed(2)}`;
+        td_tax.textContent = `$${taxPrice.toFixed(2)}`;
+        td_total.textContent = `$${totalPrice.toFixed(2)}`;
+
+        // Adds the subtotals of all items in cart.
+        function calculateMerchandise() {
+            let total = 0;
+            cart.forEach(c => {
+                total += c.subtotal();
+            })
+            console.log("merch total:" + total);
+            return total;
+        }
+    }
     /*
     PLACEHOLDER function for checkout toaster
     requirements: display toast, clear cart, return to home view
