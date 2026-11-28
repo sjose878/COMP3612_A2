@@ -423,6 +423,16 @@ document.addEventListener("DOMContentLoaded", () => {
         // ADDRESS ME
     }
 
+    function setUpSummarySelectHandler() {
+        const form = document.querySelector("#checkout-cart-form");
+        const select_shipping = document.querySelector("#cart-shipping-choice");
+        const select_destination = document.querySelector("#cart-destination-choice");
+
+        select_shipping.addEventListener("change", updateSummary);
+        select_destination.addEventListener("change", updateSummary);
+    }
+    setUpSummarySelectHandler();
+
     // Adds the checkout event handler to checkout button.
     function setUpCheckoutHandler() {
         const btn = document.querySelector("#checkout-btn");
