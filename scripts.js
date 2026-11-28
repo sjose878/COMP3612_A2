@@ -347,6 +347,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     setUpCheckoutHandler(); // this function call is so lonely :(
 
+    //categories
     function scrollCategories(div) {
         // https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollBy 
         document.querySelector("#categories-left")
@@ -446,7 +447,6 @@ document.addEventListener("DOMContentLoaded", () => {
             pages.forEach(product => document.querySelector(`#view-${product.view}`).classList.add("hidden"));
             document.querySelector("#view-single-product").classList.remove("hidden");
         });
-
 
 
 
