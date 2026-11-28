@@ -656,7 +656,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function addFeaturedProducts(products) {
         
         const featured_products = new Set();
-         
+
         // https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
         while(featured_products.size < 5) {
             let i = Math.floor(Math.random() * products.length);
@@ -705,5 +705,12 @@ document.addEventListener("DOMContentLoaded", () => {
             ul.appendChild(li);
         });
     }
+
+    // home header shop button 
+    document.querySelector("#home-shop-button")
+    .addEventListener("click", () => {
+        pages.forEach(item => document.querySelector(`#view-${item.view}`).classList.add("hidden"));
+        document.querySelector("#view-browser").classList.remove("hidden");
+    });
     
 });
