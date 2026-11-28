@@ -110,7 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
     NEEDS ADDRESSING:
     -localStorage
     -updateCartView at the start?
-    -Update Summary/Shipping
     */
     function addToCart(e) {
         // Don't try submitting to server
@@ -317,8 +316,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const quantityInput = document.querySelector("#single-product-quantity");
             form.dataset.num_items = quantityInput.value;
             addToCart(e)
-        }    
-    
+        }
+
+    /*
+    Updates the checkout summary. Displays merchandise price, shipping price, tax, and total for cart order.
+    */
     function updateSummary() {
         const TAX_RATE = 0.05;
         const FREE_SHIPPING_THRESHOLD = 500;
@@ -423,22 +425,23 @@ document.addEventListener("DOMContentLoaded", () => {
         // ADDRESS ME
     }
 
+    /*
+    Makes it so that checkout summary is updated when select values are changed in checkout form.
+    */
     function setUpSummarySelectHandler() {
-        const form = document.querySelector("#checkout-cart-form");
         const select_shipping = document.querySelector("#cart-shipping-choice");
         const select_destination = document.querySelector("#cart-destination-choice");
-
         select_shipping.addEventListener("change", updateSummary);
         select_destination.addEventListener("change", updateSummary);
     }
-    setUpSummarySelectHandler();
+    setUpSummarySelectHandler(); // NOTE: move me to a main function?
 
     // Adds the checkout event handler to checkout button.
     function setUpCheckoutHandler() {
         const btn = document.querySelector("#checkout-btn");
         btn.addEventListener("click", checkout);
     }
-    setUpCheckoutHandler(); // this function call is so lonely :(
+    setUpCheckoutHandler(); // NOTE: move me to a main function?
 
     function addCategories(categories, thumbnails) {              
         const div = document.querySelector("#categories");
